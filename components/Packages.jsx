@@ -35,7 +35,7 @@ function Packages() {
               spaceBetween: 50,
             },
           }}
-          loop={true}
+          loop={true} 
           navigation={true}
           modules={[Navigation, Autoplay]}
           className="mySwiper swiper"

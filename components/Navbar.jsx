@@ -44,8 +44,8 @@ function Navbar() {
                         <Input
                             fullWidth
                             disableUnderline
-                            sx={{ border: '1px solid lightgrey', borderRadius: '50px', padding: '10px 0px 10px 20px', fontWeight: 'bold' }}
-                            placeholder='Search location ... '
+                            sx={{ border: '1px solid lightgrey', borderRadius: '50px', padding: '5px 0px 5px 20px', fontWeight: 'bold' }}
+                            placeholder='Search location... '
                             endAdornment={
                                 <InputAdornment position='end'>
                                     <IconButton size='large' color='warning' onClick={handleSearchBar}>
@@ -61,8 +61,8 @@ function Navbar() {
                             <Input
                                 fullWidth
                                 disableUnderline
-                                sx={{ border: '1px solid lightgrey', borderRadius: '50px', padding: '10px 0px 10px 20px', fontWeight: 'bold' }}
-                                placeholder='Search location ... '
+                                sx={{ border: '1px solid lightgrey', borderRadius: '50px', padding: '5px 0px 5px 20px', fontWeight: 'bold' }}
+                                placeholder='Search location... '
                                 endAdornment={
                                     <InputAdornment position='end'>
                                         <IconButton size='large' color='warning' onClick={handleSearchBar}>
@@ -119,7 +119,7 @@ const Nav = styled(Typography)(({ theme }) => ({
     flex: '1',
     justifyContent: 'space-between',
     alignItems: 'center',
-    padding: '10px'
+    // padding: '10px'
 }))
 
 
