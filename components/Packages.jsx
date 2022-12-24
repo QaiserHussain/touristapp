@@ -11,8 +11,8 @@ function Packages() {
 
 
   return (
-    <Typography component={'div'} sx={{ padding: { xs: '10px', sm: '20px', md: '50px 80px', }, color: '#6D6D6D' }}>
-      <Typography component={'div'} variant='h4' sx={{ textAlign: 'center', marginBottom: '20px' }}>Packages</Typography>
+    <Typography component={'div'} sx={{ padding: { xs: '5px 10px', sm: '10px 20px', md: '50px 80px', }, color: '#6D6D6D' }}>
+      <Typography component={'div'} variant='h4' sx={{ textAlign: 'center', marginBottom: '20px',fontSize:{xs:'24px'},fontWeight:{xs:'bold'} }}>Packages</Typography>
       <Typography component={'div'} sx={{ width: '100%' }}>
         <Swiper
           slidesPerView={4}
@@ -43,18 +43,18 @@ function Packages() {
         >
           <SwiperSlide style={{ textAlign: 'start' }}>
             <Card sx={{ width: '100%', border: 'none', boxShadow: 'none' }}>
-              <Typography component={'div'} sx={{ height: { xs: '250px', sm: '300px', md: '300px', lg: '300px' } }}>
+              <Typography component={'div'} sx={{ height: { xs: '200px', sm: '300px', md: '300px', lg: '300px' } }}>
                 <Image src={two} alt="two" style={{ width: '100%', height: '100%', borderRadius: '20px' }} />
               </Typography>
               <CardContent sx={{ padding: '0', paddingTop: '10px' }}>
-                <Typography component={"div"} gutterBottom variant="h5" sx={{ display: 'flex', justifyContent: 'space-between' }} >
+                <Typography component={"div"} gutterBottom variant="h5" sx={{ display: 'flex', justifyContent: 'space-between',fontSize:{xs:'20px',sm:'24px',md:'24px'} }} >
                   <span>Pakistan, Sindh</span>
                   <span><MdStar /> 5.0</span>
                 </Typography>
                 <Typography component={"div"} variant="body1" color="text.secondary" gutterBottom>
                   560,2 kilometer away <br /> Feb 26 - Mar 3
                 </Typography>
-                <Typography component={"div"} variant="h6"  >
+                <Typography component={"div"} variant="h6" sx={{fontSize:{xs:'20px',sm:'24px',md:'24px'}}} >
                   $113 night
                 </Typography>
               </CardContent>
@@ -62,18 +62,18 @@ function Packages() {
           </SwiperSlide>
           <SwiperSlide style={{ textAlign: 'start' }}>
             <Card sx={{ width: '100%', border: 'none', boxShadow: 'none' }}>
-            <Typography component={'div'} sx={{ height: { xs: '250px', sm: '300px', md: '300px', lg: '300px' } }}>
+            <Typography component={'div'} sx={{ height: { xs: '200px', sm: '300px', md: '300px', lg: '300px' } }}>
                 <Image src={two} alt="two" style={{ width: '100%', height: '100%', borderRadius: '20px' }} />
               </Typography>
               <CardContent sx={{ padding: '0', paddingTop: '10px' }}>
-                <Typography component={"div"} gutterBottom variant="h5" sx={{ display: 'flex', justifyContent: 'space-between' }} >
+                <Typography component={"div"} gutterBottom variant="h5" sx={{ display: 'flex', justifyContent: 'space-between', fontSize:{xs:'20px',sm:'24px',md:'24px'} }} >
                   <span>Pakistan, Sindh</span>
                   <span><MdStar /> 5.0</span>
                 </Typography>
                 <Typography component={"div"} variant="body1" color="text.secondary" gutterBottom>
                   560,2 kilometer away <br /> Feb 26 - Mar 3
                 </Typography>
-                <Typography component={"div"} variant="h6"  >
+                <Typography component={"div"} variant="h6" sx={{fontSize:{xs:'20px',sm:'24px',md:'24px'}}}>
                   $113 night
                 </Typography>
               </CardContent>
@@ -81,18 +81,18 @@ function Packages() {
           </SwiperSlide>
           <SwiperSlide style={{ textAlign: 'start' }}>
             <Card sx={{ width: '100%', border: 'none', boxShadow: 'none' }}>
-            <Typography component={'div'} sx={{ height: { xs: '250px', sm: '300px', md: '300px', lg: '300px' } }}>
+            <Typography component={'div'} sx={{ height: { xs: '200px', sm: '300px', md: '300px', lg: '300px' } }}>
                 <Image src={two} alt="two" style={{ width: '100%', height: '100%', borderRadius: '20px' }} />
               </Typography>
               <CardContent sx={{ padding: '0', paddingTop: '10px' }}>
-                <Typography component={"div"} gutterBottom variant="h5" sx={{ display: 'flex', justifyContent: 'space-between' }} >
+                <Typography component={"div"} gutterBottom variant="h5" sx={{ display: 'flex', justifyContent: 'space-between',fontSize:{xs:'20px',sm:'24px',md:'24px'} }} >
                   <span>Pakistan, Sindh</span>
                   <span><MdStar /> 5.0</span>
                 </Typography>
                 <Typography component={"div"} variant="body1" color="text.secondary" gutterBottom>
                   560,2 kilometer away <br /> Feb 26 - Mar 3
                 </Typography>
-                <Typography component={"div"} variant="h6"  >
+                <Typography component={"div"} variant="h6" sx={{fontSize:{xs:'20px',sm:'24px',md:'24px'}}} >
                   $113 night
                 </Typography>
               </CardContent>
@@ -100,18 +100,18 @@ function Packages() {
           </SwiperSlide>
           <SwiperSlide style={{ textAlign: 'start' }}>
             <Card sx={{ width: '100%', border: 'none', boxShadow: 'none' }}>
-            <Typography component={'div'} sx={{ height: { xs: '250px', sm: '300px', md: '300px', lg: '300px' } }}>
+            <Typography component={'div'} sx={{ height: { xs: '200px', sm: '300px', md:'300px', lg: '300px' } }}>
                 <Image src={two} alt="two" style={{ width: '100%', height: '100%', borderRadius: '20px' }} />
               </Typography>
               <CardContent sx={{ padding: '0', paddingTop: '10px' }}>
-                <Typography component={"div"} gutterBottom variant="h5" sx={{ display: 'flex', justifyContent: 'space-between' }} >
+                <Typography component={"div"} gutterBottom variant="h5" sx={{ display: 'flex', justifyContent: 'space-between',fontSize:{xs:'20px',sm:'24px',md:'24px'} }} >
                   <div>Pakistan, Sindh</div>
                   <div><MdStar /> 5.0</div>
                 </Typography>
                 <Typography component={"div"} variant="body1" color="text.secondary" gutterBottom>
                   560,2 kilometer away <br /> Feb 26 - Mar 3
                 </Typography>
-                <Typography component={"div"} variant="h6"  >
+                <Typography component={"div"} variant="h6" sx={{fontSize:{xs:'20px',sm:'24px',md:'24px'}}} >
                   $113 night
                 </Typography>
               </CardContent>
