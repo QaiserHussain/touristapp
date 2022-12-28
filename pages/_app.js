@@ -3,7 +3,7 @@ import { store } from '../store/store';
 import { Provider } from 'react-redux';
 import { ThemeProvider } from '@mui/material'
 import Layout from '../components/Layout';
-import theme from './theme';
+import {theme} from '../components/theme';
 import "swiper/css";
 import "swiper/css/pagination";
 import "swiper/css/navigation";

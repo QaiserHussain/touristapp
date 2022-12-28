@@ -1,4 +1,4 @@
-import { AppBar, Toolbar, Typography, IconButton, Avatar, styled, InputAdornment, Input, Popover } from '@mui/material'
+import { colors, AppBar, Toolbar, Typography, IconButton, Avatar, styled, InputAdornment, Input, Popover,useTheme } from '@mui/material'
 import { useState } from 'react'
 import { MdMenu, MdLanguage, MdSearch } from 'react-icons/md'
 
@@ -44,11 +44,11 @@ function Navbar() {
                         <Input
                             fullWidth
                             disableUnderline
-                            sx={{ border: '1px solid lightgrey', borderRadius: '50px', padding: '5px 0px 5px 20px', fontWeight: 'bold' }}
+                            sx={{ border: '1px solid lightgrey', borderRadius: '50px', padding: '2px 0px 2px 15px', fontSize:'12px' }}
                             placeholder='Search location... '
                             endAdornment={
                                 <InputAdornment position='end'>
-                                    <IconButton size='large' color='warning' onClick={handleSearchBar}>
+                                    <IconButton size='small' sx={{color:colors.orange[600]}} onClick={handleSearchBar}>
                                         <MdSearch />
                                     </IconButton>
                                 </InputAdornment>
@@ -61,11 +61,11 @@ function Navbar() {
                             <Input
                                 fullWidth
                                 disableUnderline
-                                sx={{ border: '1px solid lightgrey', borderRadius: '50px', padding: '5px 0px 5px 20px', fontWeight: 'bold' }}
+                                sx={{ border: '1px solid lightgrey', borderRadius: '50px', padding: '2px 0px 2px 15px', fontSize:'12px' }}
                                 placeholder='Search location... '
                                 endAdornment={
                                     <InputAdornment position='end'>
-                                        <IconButton size='large' color='warning' onClick={handleSearchBar}>
+                                        <IconButton size='small' sx={{color:colors.orange[600]}} onClick={handleSearchBar}>
                                             <MdSearch />
                                         </IconButton>
                                     </InputAdornment>
@@ -82,7 +82,7 @@ function Navbar() {
                                         setShowBar('-100px')
                                     }
                                 }}
-                                sx={{ display: { xs: 'block', sm: 'none', md: 'none' } }}
+                                sx={{ display: { sm: 'none', md: 'none' } }}
                             >
                                 <MdSearch />
                             </IconButton>
@@ -125,6 +125,7 @@ const Nav = styled(Typography)(({ theme }) => ({
 
 const Logo = styled(Typography)(({ theme }) => ({
     fontSize: '28px',
+    color:colors.orange[600]
 }))
 
 const SearchBar = styled(Typography)(({ theme }) => ({
