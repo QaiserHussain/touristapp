@@ -2,9 +2,11 @@ import { AppBar, styled, Toolbar, Typography, colors, IconButton, Button, useThe
 import { MdOutlineHouse, MdOutlineFilterAlt, MdChevronLeft, MdChevronRight } from 'react-icons/md'
 import Link from 'next/link'
 import { useEffect, useState } from 'react'
+import Modal from './Modal';
 
 function NavbarChild() {
     const [screenSize, setScreenSize] = useState(0);
+    const [open, setOpen] = useState(false);
     const items = [
         { id: 1, name: 'Desert' }, { id: 2, name: 'Maldieves' }, { id: 3, name: 'India' }, { id: 4, name: 'Pakistan' },
         { id: 5, name: 'Austrailia' }, { id: 6, name: 'Japan' }, { id: 7, name: 'China' }, { id: 8, name: 'Sirilanka' },
@@ -24,6 +26,14 @@ function NavbarChild() {
         console.log('clicked left');
     }
 
+    const handleModal = ()=>{
+     if(!open){
+        setOpen(true)
+     }else{
+        setOpen(false)
+     }
+    }
+
     function screenWidth() {
         setScreenSize(screen.width)
         setScreenSize(window.innerWidth);
@@ -34,7 +44,7 @@ function NavbarChild() {
 
     return (
         <ChildNav>
-            <Toolbar disableGutters={true}>
+            <Toolbar>
                 <NavWrapper component='div'>
                     <IconButtonLeft component='div' onClick={handleLeft}><MdChevronLeft style={{ fontSize: '30px', color: colors.grey[600], background: colors.grey[200], borderRadius: '50%', padding: '5px' }} /></IconButtonLeft>
                     <WrapBox component='div' className='wrapbox'>
@@ -53,27 +63,28 @@ function NavbarChild() {
                     <IconButtonRight component='div' onClick={handleRight}><MdChevronRight style={{ fontSize: '30px', color: colors.grey[600], background: colors.grey[200], borderRadius: '50%', padding: '5px' }} /></IconButtonRight>
                 </NavWrapper>
                 {screenSize < 600 ?
-                    <IconButton sx={{ color: colors.orange[600] }}>
+                    <IconButton sx={{ color: colors.orange[600] }} onClick={handleModal} >
                         <MdOutlineFilterAlt />
                     </IconButton>
                     :
-                    <Button variant='contained' size='small' color='primary' startIcon={<MdOutlineFilterAlt />}>Filter</Button>
+                    <Button variant='contained' size='small' color='primary' onClick={handleModal} startIcon={<MdOutlineFilterAlt />}>Filter</Button>
                 }
+
+                <Modal open={open} handleModal={handleModal} />
 
             </Toolbar>
         </ChildNav >
+
     )
 }
 const ChildNav = styled(AppBar)(({ theme }) => ({
     backgroundColor: 'white',
-    padding: '0px 20px',
-    marginTop: '50px',
+    marginTop: '49px',
     minHeight: '30px',
     boxShadow: 'none',
     borderBottom: '1px solid lightgrey',
     [theme.breakpoints.down('sm')]: {
-        marginTop: '47px',
-        padding: '0px 5px'
+        marginTop: '45px',
     }
 }))
 
@@ -88,7 +99,6 @@ const NavWrapper = styled(Typography)(({ theme }) => ({
     [theme.breakpoints.down('sm')]: {
         overflowX: 'auto',
         padding: '0'
-       
     }
 }))
 const WrapBox = styled(Typography)(({ theme }) => ({
@@ -97,11 +107,9 @@ const WrapBox = styled(Typography)(({ theme }) => ({
     overflowX: 'hidden',
     gap: '20px',
     scrollBehavior: 'smooth',
-    marginLeft: '10px',
     marginRight: '10px',
     padding: '5px 0',
     [theme.breakpoints.down('sm')]: {
-        marginLeft: '2px',
         marginRight: '2px',
         overflowX: 'auto',
         gap:'10px',
@@ -127,7 +135,7 @@ const IconButtonLeft = styled(Typography)(({ theme }) => ({
     height: '100%',
     display: 'flex',
     alignItems: 'center',
-    justifyContent: 'center',
+    justifyContent: 'start',
     cursor: 'pointer',
     [theme.breakpoints.down('sm')]: {
         display: 'none'
@@ -142,7 +150,7 @@ const IconButtonRight = styled(Typography)(({ theme }) => ({
     height: '100%',
     display: 'flex',
     alignItems: 'center',
-    justifyContent: 'center',
+    justifyContent: 'end',
     cursor: 'pointer',
     [theme.breakpoints.down('sm')]: {
         display: 'none'

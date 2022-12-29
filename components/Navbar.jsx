@@ -104,6 +104,7 @@ function Navbar() {
                     </Nav>
 
 
+                
                     <Menu
                         id="basic-menu"
                         anchorEl={anchorEl}
@@ -112,8 +113,9 @@ function Navbar() {
                         MenuListProps={{
                             'aria-labelledby': 'basic-button',
                         }}
+                      
                     >
-                        <Box sx={{ minWidth:{xs:'250px',sm:'250px',md:'250px'} }}>
+                    <Box sx={{ minWidth:{xs:'250px',sm:'250px',md:'250px'}}}>
                             <MenuHead>
                                 <Avatar sx={{ height:{ xs:'40px',sm:'40px'}, width:{ xs:'40px',sm:'40px'} }} />
                                 <MenuHeadText>
@@ -166,6 +168,7 @@ const AppBarNav = styled(AppBar)(({ theme }) => ({
     borderBottom: '1px solid lightgrey',
     boxShadow: 'none',
     color: '#6D6D6D',
+    
 }))
 
 

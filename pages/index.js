@@ -1,6 +1,8 @@
 import Head from 'next/head'
 import Slider from '../components/Slider'
 import Packages from '../components/Packages'
+import Featured from '../components/featured'
+import { Box } from '@mui/material'
 
 
 export default function Home() {
@@ -12,10 +14,11 @@ export default function Home() {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <main style={{ marginTop: '80px' }}>
+      <Box sx={{ margin:{xs: '120px 10px 20px 10px',sm: '120px 50px 20px 50px', md: '120px 50px 50px 50px'}}}>
         {/* <Slider /> */}
         <Packages/>
-      </main>
+        <Featured />
+      </Box>
 
 
     </>

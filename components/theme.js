@@ -4,6 +4,7 @@ export const theme = createTheme({
     components: {
         MuiAppBar: {
             styleOverrides: {
+
                 root: {
                     '@media (min-width: 600px)': {
                         minHeight: 34,
@@ -31,7 +32,7 @@ export const theme = createTheme({
         MuiIconButton: {
             styleOverrides: {
                 root: {
-                    fontSize:24,
+                    fontSize: 24,
                     '@media (max-width: 600px)': {
                         fontSize: 20
                     }
@@ -50,12 +51,12 @@ export const theme = createTheme({
                     }
                 }
             }
-        }
+        },
     },
 
     palette: {
-        brand:{
-            main:colors.orange[600]
+        brand: {
+            main: colors.orange[600]
         },
         heading: {
             main: colors.grey[900]
@@ -67,17 +68,29 @@ export const theme = createTheme({
 
     typography: {
         h4: {
-            fontSize:'24px',
-            width:'max-content',
-            marginLeft:'auto',
-            marginRight:'auto',
+            position:'relative',
+            fontSize: '24px',
+            width: 'max-content',
+            marginLeft: 'auto',
+            marginRight: 'auto',
             marginBottom: '40px',
             textAlign: 'center',
-            paddingBottom:'5px',
+            paddingBottom: '5px',
             color: colors.grey[700],
-            borderBottom:`1px solid ${colors.orange[600]}`,
+            fontWeight:'bold',
+            borderBottom: `1px solid ${colors.orange[600]}`,
+            '&:after':{
+             content:'""',
+             position:'absolute',
+             bottom:'-7px',
+             display:'flex',
+             left:'0',
+             height:'1px',
+             width:'70px',
+             backgroundColor:colors.orange[600]
+            },
             '@media (max-width: 600px)': {
-                fontSize: 18,
+                fontSize: '20px',
                 marginBottom: '20px',
             }
         },
@@ -92,8 +105,8 @@ export const theme = createTheme({
         h6: {
             lineHeight: 1,
             color: colors.grey[800],
-            fontSize:'14px',
-            fontWeight:'bold',
+            fontSize: '14px',
+            fontWeight: 'bold',
             '@media (max-width: 600px)': {
                 fontSize: 14,
                 fontWeight: 'bold',
