@@ -1,6 +1,7 @@
 import { Grid, Typography } from '@mui/material'
 import React from 'react'
 import FeaturedCard from './FeaturedCard'
+import Link from 'next/link'
 
 function Featured() {
     const items = [1, 2, 3, 4, 5, 6, 7, 8, 9];
@@ -14,7 +15,7 @@ function Featured() {
                 >
                 {items.map(i => (
                     <Grid item xs={12} sm={6} md={3} key={i}>
-                        <FeaturedCard />
+                       <Link href={'/posts/124'}><FeaturedCard /> </Link>
                     </Grid>
                 ))}
             </Grid>

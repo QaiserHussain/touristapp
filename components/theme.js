@@ -1,10 +1,9 @@
-import { createTheme, colors, useTheme } from '@mui/material';
+import { createTheme, colors } from '@mui/material';
 
 export const theme = createTheme({
     components: {
         MuiAppBar: {
             styleOverrides: {
-
                 root: {
                     '@media (min-width: 600px)': {
                         minHeight: 34,

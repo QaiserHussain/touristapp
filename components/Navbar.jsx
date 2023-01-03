@@ -1,15 +1,28 @@
 import { colors, AppBar, Toolbar, Typography, IconButton, Avatar, styled, InputAdornment, Input, Menu, MenuItem, Box, ListItemIcon, Button, Divider } from '@mui/material'
 import { useState } from 'react'
 import { MdMenu, MdLanguage, MdSearch, MdOutlinePortrait, MdOutlineManageAccounts, MdFavoriteBorder, MdLogout } from 'react-icons/md'
+import NavbarMenu from './NavbarMenu';
+import { DateRangePicker } from 'react-date-range';
+import 'react-date-range/dist/styles.css'
+import 'react-date-range/dist/theme/default.css'
+
+
 
 function Navbar() {
     const [showBar, setShowBar] = useState('-100px');
     const [check, setCheck] = useState(true);
     const [anchorEl, setAnchorEl] = useState(null);
+    const [searchInput, setSearchInput] = useState('');
+    const [startDate, setStartDate] = useState(new Date());
+    const [endDate, setEndDate] = useState(new Date());
+
+
+    const selectionRange = { startDate: startDate, endDate: endDate, key: 'selection' }
+    const handleSelect = (ranges) => { setStartDate(ranges.selection.startDate); setEndDate(ranges.selection.endDate); }
+
     const open = Boolean(anchorEl);
 
     const handleSearchBar = () => { if (showBar === '-100px' && check === false) { setShowBar('0'); } else { setShowBar('-100px'); setCheck(true); } }
-
     const handleMenu = (e) => {
         if (!anchorEl) {
             setAnchorEl(e.currentTarget);
@@ -38,8 +51,10 @@ function Navbar() {
                         <Input
                             fullWidth
                             disableUnderline
+                            value={searchInput}
+                            onChange={(e) => { setSearchInput(e.target.value) }}
                             sx={{ border: '1px solid lightgrey', borderRadius: '50px', padding: '2px 0px 2px 15px', fontSize: '12px' }}
-                            placeholder='Search location... '
+                            placeholder='Search location...'
                             endAdornment={
                                 <InputAdornment position='end'>
                                     <IconButton size='small' sx={{ color: colors.orange[600] }} onClick={handleSearchBar}>
@@ -55,6 +70,8 @@ function Navbar() {
                             <Input
                                 fullWidth
                                 disableUnderline
+                                value={searchInput}
+                                onChange={(e) => { setSearchInput(e.target.value) }}
                                 sx={{ border: '1px solid lightgrey', borderRadius: '50px', padding: '2px 0px 2px 15px', fontSize: '12px' }}
                                 placeholder='Search location... '
                                 endAdornment={
@@ -65,6 +82,17 @@ function Navbar() {
                                     </InputAdornment>
                                 }
                             />
+                            {searchInput && (
+                                <div style={{position:'fixed',top:'50px',zIndex:'1100 important!'}}>
+                                    <DateRangePicker
+                                        ranges={[selectionRange]}
+                                        minDate={new Date()}
+                                        rangeColors={['#FD5B6L']}
+                                        onChange={handleSelect}
+                                        direction={'horizontal'}
+                                    />
+                                </div>
+                            )}
                         </SearchBar>
                         <Icons component={'div'}>
                             <IconButton size='large' color='warning'
@@ -85,11 +113,6 @@ function Navbar() {
                                 <MdLanguage />
                             </IconButton>
 
-                            {/* <Credentials component={'div'}>
-                                <IconButton size='large'><MdMenu /></IconButton>
-                                <IconButton><Avatar /></IconButton>
-                            </Credentials> */}
-
                             <IconButton
                                 type='button'
                                 id="basic-button"
@@ -102,62 +125,10 @@ function Navbar() {
                             </IconButton>
                         </Icons>
                     </Nav>
-
-
-                
-                    <Menu
-                        id="basic-menu"
-                        anchorEl={anchorEl}
-                        open={open}
-                        onClose={handleMenu}
-                        MenuListProps={{
-                            'aria-labelledby': 'basic-button',
-                        }}
-                      
-                    >
-                    <Box sx={{ minWidth:{xs:'250px',sm:'250px',md:'250px'}}}>
-                            <MenuHead>
-                                <Avatar sx={{ height:{ xs:'40px',sm:'40px'}, width:{ xs:'40px',sm:'40px'} }} />
-                                <MenuHeadText>
-                                    <Typography component='div' variant='body1'>Qaiser Hussain</Typography>
-                                    <Typography component='div' variant='caption'>qaiserh844@gmail.com</Typography>
-                                </MenuHeadText>
-                            </MenuHead>
-
-                            <MenuItem onClick={handleMenu}>
-                                <ListItemIcon>
-                                    <MdOutlinePortrait fontSize="large" />
-                                </ListItemIcon>
-                                Profile
-                            </MenuItem>
-                            <MenuItem onClick={handleMenu}>
-                                <ListItemIcon>
-                                    <MdFavoriteBorder fontSize="large" />
-                                </ListItemIcon>
-                                Wishlist
-                            </MenuItem>
-                            <MenuItem onClick={handleMenu}>
-                                <ListItemIcon>
-                                    <MdOutlineManageAccounts fontSize="large" />
-                                </ListItemIcon>
-                                Setting
-                            </MenuItem>
-
-                            <MenuItem onClick={handleMenu}>
-                                <ListItemIcon>
-                                    <MdLogout fontSize="large" />
-                                </ListItemIcon>
-                                Sign out
-                            </MenuItem>
-                            <Divider />
-                            <MenuFoot>
-                                <Button variant='contained' color='warning'> SignIn</Button>
-                                <Button variant='outlined' color='warning' > SignUp</Button>
-                            </MenuFoot>
-                        </Box>
-                    </Menu>
                 </Toolbar>
             </AppBarNav>
+            <NavbarMenu anchorEl={anchorEl} handleMenu={handleMenu} open={open} />
+
         </>
     )
 }
@@ -168,7 +139,7 @@ const AppBarNav = styled(AppBar)(({ theme }) => ({
     borderBottom: '1px solid lightgrey',
     boxShadow: 'none',
     color: '#6D6D6D',
-    
+
 }))
 
 
@@ -199,22 +170,6 @@ const Icons = styled(Typography)(({ theme }) => ({
     alignItems: 'center',
 }))
 
-const MenuHead = styled(Box)(({ theme }) => ({
-    display: 'flex',
-    alignItems: 'center',
-    gap: '20px',
-    padding: '10px',
-}))
-const MenuHeadText = styled(Box)(({ theme }) => ({
-    display: 'flex',
-    flexDirection: 'column'
-}))
-
-const MenuFoot = styled(Box)(({ theme }) => ({
-    display: 'flex',
-    justifyContent: 'center',
-    gap: '20px'
-}))
 // const Credentials = styled(Typography)(({ theme }) => ({
 //     border: '1px solid lightgrey',
 //     borderRadius: '50px',

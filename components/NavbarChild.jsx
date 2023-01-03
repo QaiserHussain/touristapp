@@ -78,6 +78,7 @@ function NavbarChild() {
     )
 }
 const ChildNav = styled(AppBar)(({ theme }) => ({
+    zIndex:200,
     backgroundColor: 'white',
     marginTop: '49px',
     minHeight: '30px',
