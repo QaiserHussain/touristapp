@@ -9,7 +9,7 @@ import { Typography } from "@mui/material";
 function Slider() {
 
   return (
-    <Typography sx={{height:{xs:'300px',sm:'300px',md:'500px'}, width: '100%'}} component={'div'}>
+    <Typography sx={{height:{xs:'200px',sm:'300px',md:'400px'}, width: '100%',marginBottom:'20px'}} component={'div'}>
       <Swiper
         slidesPerView={1}
         spaceBetween={30}

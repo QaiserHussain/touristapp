@@ -1,28 +1,51 @@
 import { colors, AppBar, Toolbar, Typography, IconButton, Avatar, styled, InputAdornment, Input, Menu, MenuItem, Box, ListItemIcon, Button, Divider } from '@mui/material'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { MdMenu, MdLanguage, MdSearch, MdOutlinePortrait, MdOutlineManageAccounts, MdFavoriteBorder, MdLogout } from 'react-icons/md'
 import NavbarMenu from './NavbarMenu';
-import { DateRangePicker } from 'react-date-range';
+import { DateRange, DateRangePicker } from 'react-date-range';
 import 'react-date-range/dist/styles.css'
 import 'react-date-range/dist/theme/default.css'
+import format from 'date-fns/format'
 
 
 
 function Navbar() {
     const [showBar, setShowBar] = useState('-100px');
+
     const [check, setCheck] = useState(true);
     const [anchorEl, setAnchorEl] = useState(null);
     const [searchInput, setSearchInput] = useState('');
-    const [startDate, setStartDate] = useState(new Date());
-    const [endDate, setEndDate] = useState(new Date());
-
-
-    const selectionRange = { startDate: startDate, endDate: endDate, key: 'selection' }
-    const handleSelect = (ranges) => { setStartDate(ranges.selection.startDate); setEndDate(ranges.selection.endDate); }
+    const [form, setForm] = useState({startDate:format(new Date(), 'MM/dd/yyyy'),endDate:format(new Date(), 'MM/dd/yyyy')});
+    const [selectionRange, setSelectionRange] = useState({ startDate: new Date(), endDate: new Date(), key: 'selection' });
 
     const open = Boolean(anchorEl);
 
-    const handleSearchBar = () => { if (showBar === '-100px' && check === false) { setShowBar('0'); } else { setShowBar('-100px'); setCheck(true); } }
+    const handleSelect = (ranges) => {
+        setSelectionRange({
+            startDate: ranges.selection.startDate,
+            endDate: ranges.selection.endDate,
+            key: 'selection'
+        });
+        setForm({
+            startDate:format(ranges.selection.startDate, 'MM/dd/yyyy'),
+            endDate:format(ranges.selection.endDate, 'MM/dd/yyyy')
+        })
+    }
+
+    const handleSearchBar = () => {
+        setSearchInput('')
+        if (showBar === '-100px' && check === false) {
+            setShowBar('0');
+
+        } else {
+            setShowBar('-100px');
+            setCheck(true);
+        }
+        console.log(form);
+        console.log(searchInput);
+    }
+
+
     const handleMenu = (e) => {
         if (!anchorEl) {
             setAnchorEl(e.currentTarget);
@@ -38,10 +61,11 @@ function Navbar() {
         right: '0',
         backgroundColor: 'white',
         zIndex: '999',
-        height: '80px',
+        height: '50px',
         padding: '5px',
         transition: 'ease-in-out 0.5s'
     }
+
 
     return (
         <>
@@ -52,7 +76,7 @@ function Navbar() {
                             fullWidth
                             disableUnderline
                             value={searchInput}
-                            onChange={(e) => { setSearchInput(e.target.value) }}
+                            onChange={(e) => { setSearchInput(e.target.value)}}
                             sx={{ border: '1px solid lightgrey', borderRadius: '50px', padding: '2px 0px 2px 15px', fontSize: '12px' }}
                             placeholder='Search location...'
                             endAdornment={
@@ -82,17 +106,6 @@ function Navbar() {
                                     </InputAdornment>
                                 }
                             />
-                            {searchInput && (
-                                <div style={{position:'fixed',top:'50px',zIndex:'1100 important!'}}>
-                                    <DateRangePicker
-                                        ranges={[selectionRange]}
-                                        minDate={new Date()}
-                                        rangeColors={['#FD5B6L']}
-                                        onChange={handleSelect}
-                                        direction={'horizontal'}
-                                    />
-                                </div>
-                            )}
                         </SearchBar>
                         <Icons component={'div'}>
                             <IconButton size='large' color='warning'
@@ -125,8 +138,21 @@ function Navbar() {
                             </IconButton>
                         </Icons>
                     </Nav>
+                    {searchInput && (
+                        <div style={{ width: '95%', position: 'fixed', top: '50px', zIndex: '1100 important!', display: 'flex', justifyContent: 'center' }}>
+                            <DateRange
+                                ranges={[selectionRange]}
+                                minDate={new Date()}
+                                editableDateInputs={true}
+                                rangeColors={['#FD5B6L']}
+                                onChange={handleSelect}
+
+                            />
+                        </div>
+                    )}
                 </Toolbar>
             </AppBarNav>
+
             <NavbarMenu anchorEl={anchorEl} handleMenu={handleMenu} open={open} />
 
         </>

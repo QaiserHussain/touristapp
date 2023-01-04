@@ -5,8 +5,8 @@ import Featured from '../components/featured'
 import { Box } from '@mui/material'
 
 
-export default function Home({houses}) {
-  console.log(houses);
+export default function Home() {
+
   return (
     <>
       <Head>
@@ -16,7 +16,7 @@ export default function Home({houses}) {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <Box>
-        {/* <Slider /> */}
+        <Slider />
         <Packages/>
         <Featured />
       </Box>

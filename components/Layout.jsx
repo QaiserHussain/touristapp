@@ -8,7 +8,7 @@ function Layout({ children }) {
     <div>
       <Navbar />
       <NavbarChild />
-      <Box sx={{ margin:{xs: '120px 10px 20px 10px',sm: '120px 50px 20px 50px', md: '120px 50px 50px 50px'}}}>
+      <Box sx={{ margin:{xs: '110px 10px 20px 10px',sm: '110px 50px 20px 50px', md: '110px 50px 50px 50px'}}}>
         {children}
       </Box>
       <Footer />
