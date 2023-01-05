@@ -1,19 +1,28 @@
 import data from '../../utils/seed';
 import db from '../../utils/db';
-import User from '../../models/user';
+import User from '../../models/users';
+import bcrypt from 'bcrypt'
 
 
 
-const handler = async(req,res)=>{
+const handler = async (req, res) => {
   const data = req.body;
   await db.connect();
-    // await User.insertMany(data.users);
-  try{
-    await User.create(data)
-    res.status(201).json({ success: true, data: data })
+  const userExist = await User.findOne({ email: data.email })
+  if (userExist) {
+    return res.status(200).json({ success: false, message: 'Email already exist' })
+  }
+  try {
+    const hash = await bcrypt.hash(data.password, 10);
+    const created = await User.create({
+      username: data.username,
+      email: data.email,
+      password: hash
+    })
+    res.status(201).json({ success: true, data: created })
     await db.disconnect();
-  }catch(err){
-    res.status(400).json({ success: false})
+  } catch (err) {
+    res.status(400).json({ success: false })
   }
 }
 
