@@ -102,7 +102,7 @@ function Detail() {
 
           <Box sx={{ padding: '10px 20px' }}>
             <Button type='button' variant='contained' fullWidth>Reserved</Button>
-            <Typography variant='caption' component='div' sx={{ textAlign: 'center', marginTop: '10px' }} >you was'nt be charged yet</Typography>
+            <Typography variant='caption' component='div' sx={{ textAlign: 'center', marginTop: '10px' }} >you was not be charged yet</Typography>
           </Box>
           <Box sx={{ display: 'flex', justifyContent: 'space-between', marginBottom: '10px' }}>
             <Typography variant='body2'>$1500 * 2 nights</Typography>
