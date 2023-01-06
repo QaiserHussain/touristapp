@@ -1,5 +1,5 @@
 import db from '../../utils/db';
-import House from '../../models/house';
+import House from '../../utils/models/house';
 
 
 

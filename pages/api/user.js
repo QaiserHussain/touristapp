@@ -1,6 +1,6 @@
 import data from '../../utils/seed';
 import db from '../../utils/db';
-import User from '../../models/users';
+import User from '../../utils/models/users';
 import bcrypt from 'bcrypt'
 
 
