@@ -28,7 +28,7 @@ function Detail() {
         <Box sx={{ display: { xs: 'none', sm: 'flex', md: 'flex' } }}>
           <ImagesGrid />
         </Box>
-        <Button startIcon={<MdOutlineAutoAwesome />} variant='contained' color='warning' onClick={handleDrawer} size={'small'} sx={{ position: 'absolute', bottom: '15px', right: '15px', zIndex: '111' }}> Show Photos</Button>
+        <Button startIcon={<MdOutlineAutoAwesome />} variant='contained' color='warning' onClick={handleDrawer} size={'small'} sx={{ display:{xs:'none',sm:'flex',md:'flex'}, position: 'absolute', bottom: '15px', right: '15px', zIndex: '111' }}> Show Photos</Button>
       </Box>
 
       <Box sx={{ display: 'flex', justifyContent: 'space-between', gap: 2, marginTop: '20px', flexDirection: { xs: 'column', sm: 'column', md: 'row' } }}>

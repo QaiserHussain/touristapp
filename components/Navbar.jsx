@@ -6,10 +6,12 @@ import { DateRange, DateRangePicker } from 'react-date-range';
 import 'react-date-range/dist/styles.css'
 import 'react-date-range/dist/theme/default.css'
 import format from 'date-fns/format'
+import { useRouter } from 'next/router';
 
 
 
 function Navbar() {
+    const route = useRouter();
     const [showBar, setShowBar] = useState('-100px');
 
     const [check, setCheck] = useState(true);
@@ -89,7 +91,7 @@ function Navbar() {
                         />
                     </Typography>
                     <Nav component={'div'}>
-                        <Logo component={'div'}>Logo</Logo>
+                        <Logo component={'div'} onClick={()=>{route.push('/')}}>Logo</Logo>
                         <SearchBar component={'div'}>
                             <Input
                                 fullWidth
@@ -179,7 +181,8 @@ const Nav = styled(Typography)(({ theme }) => ({
 
 const Logo = styled(Typography)(({ theme }) => ({
     fontSize: '28px',
-    color: colors.orange[600]
+    color: colors.orange[600],
+    cursor:'pointer'
 }))
 
 const SearchBar = styled(Typography)(({ theme }) => ({

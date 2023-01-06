@@ -1,8 +1,14 @@
 import { Box, Button, Divider, IconButton, MenuItem, TextField, Typography } from '@mui/material'
 import React from 'react'
 import { MdAddCircleOutline, MdRemoveCircleOutline } from 'react-icons/md'
+import {useRouter} from 'next/router'
 
 function ReservationCard() {
+  const route = useRouter();
+  const handleReservation = ()=>{
+    route.push('/reservation')
+  }
+
   return (
     <Box sx={{ border: '1px solid lightgrey', position: 'relative', borderRadius: '10px', flex: '0.3', height: '300px', padding: '10px' }}>
 
@@ -65,7 +71,7 @@ function ReservationCard() {
     </Box>
 
     <Box sx={{ padding: '10px 20px' }}>
-      <Button type='button' variant='contained' fullWidth>Reserved</Button>
+      <Button type='button' variant='contained' fullWidth onClick={handleReservation}>Reserved</Button>
       <Typography variant='caption' component='div' sx={{ textAlign: 'center', marginTop: '10px' }} >you was not be charged yet</Typography>
     </Box>
     <Box sx={{ display: 'flex', justifyContent: 'space-between', marginBottom: '10px' }}>

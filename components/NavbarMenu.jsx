@@ -35,12 +35,6 @@ function NavbarMenu({handleMenu, anchorEl, open}) {
                     </ListItemIcon>
                     Wishlist
                 </MenuItem>
-                <MenuItem onClick={handleMenu}>
-                    <ListItemIcon>
-                        <MdOutlineManageAccounts fontSize="large" />
-                    </ListItemIcon>
-                    Setting
-                </MenuItem>
 
                 <MenuItem onClick={handleMenu}>
                     <ListItemIcon>
@@ -49,6 +43,7 @@ function NavbarMenu({handleMenu, anchorEl, open}) {
                     Sign out
                 </MenuItem>
                 <Divider />
+                
                 <MenuFoot>
                     <Button variant='contained' color='warning'> SignIn</Button>
                     <Button variant='outlined' color='warning' > SignUp</Button>
