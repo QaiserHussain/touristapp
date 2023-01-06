@@ -18,6 +18,7 @@ function Detail() {
   }
   return (
     <Typography component='div'>
+      <ImagesDrawer handleDrawer={handleDrawer} open={open} />
 
       <Head handleDrawer={handleDrawer} />
       <Box sx={{ position: 'relative' }}>
@@ -29,10 +30,6 @@ function Detail() {
         </Box>
         <Button startIcon={<MdOutlineAutoAwesome />} variant='contained' color='warning' onClick={handleDrawer} size={'small'} sx={{ position: 'absolute', bottom: '15px', right: '15px', zIndex: '111' }}> Show Photos</Button>
       </Box>
-
-
-
-      <ImagesDrawer handleDrawer={handleDrawer} open={open} />
 
       <Box sx={{ display: 'flex', justifyContent: 'space-between', gap: 2, marginTop: '20px', flexDirection: { xs: 'column', sm: 'column', md: 'row' } }}>
         {/* details */}

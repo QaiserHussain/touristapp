@@ -10,7 +10,7 @@ function ImagesDrawer({handleDrawer, open}) {
         open={open}
       // onClose={close}
       >
-        <Box sx={{ padding: '20px', position: 'relative' }}>
+        <Box sx={{ padding: '20px', position: 'relative',overflowY:'auto' }}>
           <IconButton onClick={handleDrawer} color='warning' ><MdClose /> </IconButton>
           <ImageList variant="masonry" cols={3} gap={8}>
             {itemData.map((item) => (

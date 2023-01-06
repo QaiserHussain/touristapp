@@ -50,13 +50,9 @@ function SwipeableEdgeDrawer(props) {
       <Global
         styles={{
           '.MuiDrawer-root > .MuiPaper-root': {
-            height: `calc(80% - ${drawerBleeding}px)`,
-            overflow: 'visible',
-            display: 'none',
-            '@media(max-width: 900px)': {
-              display: 'block'
-            }
-          },
+            height: `calc(100% - ${drawerBleeding}px)`,
+            overflow: 'visible'
+          }
         }}
       />
       {/* <Box sx={{ textAlign: 'center', pt: 1 }}>
@@ -72,6 +68,12 @@ function SwipeableEdgeDrawer(props) {
         disableSwipeToOpen={false}
         ModalProps={{
           keepMounted: true,
+        }}
+        sx={{
+          display: 'none',
+          '@media(max-width: 900px)': {
+            display: 'block'
+          }
         }}
       >
         <StyledBox
