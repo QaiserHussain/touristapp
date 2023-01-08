@@ -1,4 +1,4 @@
-const URL = 'http://localhost:3000';
+const URL = process.env.NODE_ENV === 'production' ? 'https://touristapp.vercel.app':'http://localhost:3000';
 
 export const getAllHouse = async ()=>{
     const data = await fetch(`${URL}/api/house`,{method:'GET'}).then(res=>res.json()).then(data=> data);
