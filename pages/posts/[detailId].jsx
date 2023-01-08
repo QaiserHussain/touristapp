@@ -18,13 +18,12 @@ function Detail() {
   console.log(data);
   if(isLoading){<div>loading...</div>}
   if(isError){<div>error!</div>}
+
   const [open, setOpen] = useState(false);
   const handleDrawer = () => {
     if (open) { setOpen(false) } else { setOpen(true) }
   }
-  // const {address,amenities,facilities,city,country,imgs,name,price,user,capacity} = data;
  
-
   return (
     <Typography component='div'>
       <ImagesDrawer handleDrawer={handleDrawer} open={open} />
@@ -110,6 +109,15 @@ function Detail() {
 }
 
 
+// export async function getServerSideProps(context) {
+//   const response = await fetch(`${URL}/api/house/?q=${context.params.query}`,{method:'GET'});
+//   const result = await response.json();
+//   return {
+//     props: {
+//       data:result
+//     }, 
+//   }
+// }
 
 export default Detail;
 

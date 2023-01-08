@@ -7,7 +7,7 @@ export const getAllHouse = async () => {
 
 export const getHouse = async (id) => {
     const data = await fetch(`${URL}/api/house/${id}`, { method: 'GET' }).then(res => res.json()).then(data => data);
-    return data
+    return data.data
 }
 
 export const createHouse = async (createData) => {

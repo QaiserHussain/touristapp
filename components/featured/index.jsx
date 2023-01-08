@@ -5,10 +5,9 @@ import Link from 'next/link'
 import {useQuery} from 'react-query'
 import {getAllHouse} from '../../helper/house';
 function Featured({items}) {
-    const {data,isError, isLoading} = useQuery('houses', getAllHouse);
-    if(isLoading){<div>loading...</div>}
-    if(isError){<div>Error</div>}
-    // console.log(data);
+    // const {data,isError, isLoading} = useQuery('houses', getAllHouse);
+    // if(isLoading){<div>loading...</div>}
+    // if(isError){<div>Error</div>}
     console.log('featured',items);
     return (
         <Typography component={'div'} sx={{ margin: { xs: '20px 10px 20px 10px', sm: '20px 10px 50px 10px', md: '80px 20px 50px 20px' } }}>
