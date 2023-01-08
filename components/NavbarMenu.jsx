@@ -1,9 +1,9 @@
-import { Avatar, Button, Divider, ListItemIcon, Menu, MenuItem, Typography,Box, styled } from "@mui/material"
+import { Avatar, Button, Divider, ListItemIcon, Menu, MenuItem, Typography, Box, styled } from "@mui/material"
 import Link from "next/link"
 import { MdFavoriteBorder, MdLogout, MdOutlineManageAccounts, MdOutlinePortrait } from "react-icons/md"
-import {useRouter} from 'next/router'
+import { useRouter } from 'next/router'
 
-function NavbarMenu({handleMenu, anchorEl, open}) {
+function NavbarMenu({ handleMenu, anchorEl, open }) {
     const route = useRouter();
     return (
         <Menu
@@ -26,38 +26,44 @@ function NavbarMenu({handleMenu, anchorEl, open}) {
                 </MenuHead>
 
                 <Link href='/profile'>
-                <MenuItem onClick={handleMenu}>
-                    <ListItemIcon>
-                        <MdOutlinePortrait fontSize="large" />
-                    </ListItemIcon>
-                    Profile
-                </MenuItem>
+                    <MenuItem onClick={handleMenu}>
+                        <ListItemIcon>
+                            <MdOutlinePortrait fontSize="large" />
+                        </ListItemIcon>
+                        Profile
+                    </MenuItem>
                 </Link>
                 <Link href='/'>
-                <MenuItem onClick={handleMenu}>
-                    <ListItemIcon>
-                        <MdFavoriteBorder fontSize="large" />
-                    </ListItemIcon>
-                    Wishlist
-                </MenuItem>
+                    <MenuItem onClick={handleMenu}>
+                        <ListItemIcon>
+                            <MdFavoriteBorder fontSize="large" />
+                        </ListItemIcon>
+                        Wishlist
+                    </MenuItem>
                 </Link>
                 <Link href='/'>
-                <MenuItem onClick={handleMenu}>
-                    <ListItemIcon>
-                        <MdLogout fontSize="large" />
-                    </ListItemIcon>
-                    Sign out
-                </MenuItem>
+                    <MenuItem onClick={handleMenu}>
+                        <ListItemIcon>
+                            <MdLogout fontSize="large" />
+                        </ListItemIcon>
+                        Sign out
+                    </MenuItem>
                 </Link>
                 <Divider />
-                
+
                 <MenuFoot>
-                    <Button variant='contained' color='warning' onClick={()=> { 
-                        route.push('/signin')
+                    <Button variant='contained' color='warning'
+                        onClick={() => {
+                            handleMenu()
+                            route.push('/signin')
                         }}> SignIn</Button>
-                    <Button variant='outlined' color='warning' onClick={()=> {
-                        route.push('/signup')
-                        }}> SignUp</Button>
+
+                    <Button variant='outlined' color='warning'
+                        onClick={() => {
+                            handleMenu()
+                            route.push('/signup')
+                        }}
+                    > SignUp</Button>
                 </MenuFoot>
             </Box>
         </Menu>
