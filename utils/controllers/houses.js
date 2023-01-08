@@ -7,6 +7,7 @@ export async function getAllHouse(req, res) {
   await db.connect();
   try {
     const fetched = await House.find();
+    if(!fetched){res.status(404).json({ success: false, message: 'No houses found' })}
     res.status(201).json({ success: true, data: fetched })
     await db.disconnect();
   } catch (err) {

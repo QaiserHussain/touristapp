@@ -4,8 +4,7 @@ import Packages from '../components/Packages'
 import Featured from '../components/featured'
 import { Box } from '@mui/material'
 
-
-export default function Home() {
+export default function Home({data}) {
   return (
     <>
       <Head>
@@ -17,19 +16,21 @@ export default function Home() {
       <Box>
         <Slider />
         <Packages/>
-        <Featured />
+        <Featured items={data}/>
       </Box>
-
-
     </>
   )
 }
-// export async function getServerSideProps() {
-//   const response = await fetch('http://localhost:3000/api/house',{method:'GET'});
-//   const result = await response.json();
-//   return {
-//     props: {
-//       cards:result.data
-//     }, 
-//   }
-// }
+
+
+const URL = process.env.NODE_ENV === 'production' ? 'https://touristapp.vercel.app' : 'http://localhost:3000';
+
+export async function getServerSideProps() {
+  const response = await fetch(`${URL}/api/house`,{method:'GET'});
+  const result = await response.json();
+  return {
+    props: {
+      data:result.data
+    }, 
+  }
+}

@@ -8,7 +8,8 @@ function Featured({items}) {
     const {data,isError, isLoading} = useQuery('houses', getAllHouse);
     if(isLoading){<div>loading...</div>}
     if(isError){<div>Error</div>}
-    console.log(data);
+    // console.log(data);
+    console.log('featured',items);
     return (
         <Typography component={'div'} sx={{ margin: { xs: '20px 10px 20px 10px', sm: '20px 10px 50px 10px', md: '80px 20px 50px 20px' } }}>
             <Typography component={'div'} variant='h4'>Features</Typography>
@@ -17,7 +18,7 @@ function Featured({items}) {
                 justifyContent="center"
                 alignItems="center" 
                 >
-                {data?.data.map(item => (
+                {items?.map(item => (
                     <Grid item xs={12} sm={6} md={3} key={item._id}>
                        <Link href={`/posts/${item._id}`}><FeaturedCard item={item} /> </Link>
                     </Grid>
