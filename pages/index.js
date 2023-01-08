@@ -6,7 +6,6 @@ import { Box } from '@mui/material'
 
 
 export default function Home() {
-
   return (
     <>
       <Head>
@@ -25,3 +24,12 @@ export default function Home() {
     </>
   )
 }
+// export async function getServerSideProps() {
+//   const response = await fetch('http://localhost:3000/api/house',{method:'GET'});
+//   const result = await response.json();
+//   return {
+//     props: {
+//       cards:result.data
+//     }, 
+//   }
+// }

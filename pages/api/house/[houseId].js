@@ -1,13 +1,10 @@
-import {createUser} from '../../utils/controllers/users';
+import {getHouse} from '../../../utils/controllers/houses';
 
 const handler = async (req, res) => {
-  const {method} = req
+  const {method} = req;
   switch (method) {
     case 'GET':
-        
-      break;
-      case 'POST':
-        createUser(req,res)
+        getHouse(req,res)
       break;
       case 'PUT':
       

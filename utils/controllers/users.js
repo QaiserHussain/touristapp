@@ -3,8 +3,8 @@ import db from '../../utils/db';
 import User from '../../utils/models/users';
 import bcrypt from 'bcrypt'
 
-export async function getUser(req,res){
-    const data = req.body;
+export async function createUser(req, res) {
+  const data = req.body;
   await db.connect();
   const userExist = await User.findOne({ email: data.email })
   if (userExist) {
@@ -15,7 +15,8 @@ export async function getUser(req,res){
     const created = await User.create({
       username: data.username,
       email: data.email,
-      password: hash
+      password: hash,
+      role: data.role
     })
     res.status(201).json({ success: true, data: created })
     await db.disconnect();

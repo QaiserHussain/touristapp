@@ -8,11 +8,9 @@ function NavbarChild() {
     const [screenSize, setScreenSize] = useState(0);
     const [open, setOpen] = useState(false);
     const items = [
-        { id: 1, name: 'Desert' }, { id: 2, name: 'Maldieves' }, { id: 3, name: 'India' }, { id: 4, name: 'Pakistan' },
-        { id: 5, name: 'Austrailia' }, { id: 6, name: 'Japan' }, { id: 7, name: 'China' }, { id: 8, name: 'Sirilanka' },
-        { id: 9, name: 'Islamabad' }, { id: 10, name: 'Karachi' }, { id: 11, name: 'Balochistan' }, { id: 12, name: 'Sindh' },
-        { id: 13, name: 'Punjab' }, { id: 14, name: 'Sialkot' }, { id: 15, name: 'Gujranwala' }, { id: 16, name: 'Sukkur' },
-        { id: 17, name: 'Saudi' }, { id: 18, name: 'Dubai' }, { id: 19, name: 'Rawalpindi' }, { id: 20, name: 'Larkana' },
+        { id: 1, name: 'Sindh' }, { id: 2, name: 'Karachi' }, { id: 3, name: 'Larkana' }, { id: 4, name: 'Sukkur' },
+        { id: 5, name: 'Faisalabad' }, { id: 6, name: 'Abottabad' }, { id: 7, name: 'Gujranwala' }, { id: 8, name: 'Mirpukhas' },
+        { id: 9, name: 'Islamabad' }, { id: 10, name: 'Sahiwal' }, { id: 11, name: 'Balochistan' }, { id: 12, name: 'Rawalpindi' }
     ]
 
     const handleRight = (e) => {

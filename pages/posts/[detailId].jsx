@@ -1,21 +1,30 @@
-import { Avatar, Box, Button, Card, CardContent, Divider, Drawer, FormControl, Grid, IconButton, ImageList, ImageListItem, InputLabel, MenuItem, TextField, Typography } from '@mui/material'
-import Image from 'next/image';
-import { useState } from 'react';
-import { MdShare, MdSaveAlt, MdAddCircleOutline, MdRemoveCircleOutline, MdClose, MdOutlineAutoAwesome, MdRadioButtonChecked } from 'react-icons/md'
-import one from '../../assets/one.jpg'
+import { Avatar, Box, Button, Divider, Grid, Typography } from '@mui/material'
+import { useEffect, useState } from 'react';
+import { MdOutlineAutoAwesome, MdRadioButtonChecked } from 'react-icons/md'
 import Head from '../../components/detail/Head';
 import ImagesDrawer from '../../components/detail/ImagesDrawer';
 import ImagesGrid from '../../components/detail/ImagesGrid';
 import ReservationCard from '../../components/detail/ReservationCard';
 import ReservationDrawer from '../../components/detail/ReservationDrawer';
 import Slider from '../../components/Slider'
-function Detail() {
-  const items = [1, 2, 3, 4, 5];
+import { useRouter } from 'next/router';
+import { useQuery } from 'react-query';
+import {getHouse} from '../../helper/house';
 
+function Detail() {
+  const route = useRouter();
+  const {detailId} = route.query;
+  const {data,isLoading,isError} = useQuery(['houses',detailId],()=>getHouse(detailId))
+  console.log(data);
+  if(isLoading){<div>loading...</div>}
+  if(isError){<div>error!</div>}
   const [open, setOpen] = useState(false);
   const handleDrawer = () => {
     if (open) { setOpen(false) } else { setOpen(true) }
   }
+  // const {address,amenities,facilities,city,country,imgs,name,price,user,capacity} = data;
+ 
+
   return (
     <Typography component='div'>
       <ImagesDrawer handleDrawer={handleDrawer} open={open} />
@@ -99,6 +108,8 @@ function Detail() {
     </Typography>
   )
 }
+
+
 
 export default Detail;
 

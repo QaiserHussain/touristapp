@@ -1,19 +1,14 @@
-import {createUser} from '../../utils/controllers/users';
+import {createHouse,getAllHouse} from '../../../utils/controllers/houses';
 
 const handler = async (req, res) => {
-  const {method} = req
+  const {method} = req;
+  const {detailId} = req.query;
   switch (method) {
     case 'GET':
-        
+        getAllHouse(req,res)
       break;
       case 'POST':
-        createUser(req,res)
-      break;
-      case 'PUT':
-      
-      break;
-      case 'DELETE':
-      
+        createHouse(req,res)
       break;
     default:
       res.setHeader('Allow',['GET','POST','PUT','DELETE'])
