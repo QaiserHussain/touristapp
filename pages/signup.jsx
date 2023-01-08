@@ -1,6 +1,6 @@
 import { Box, Button, TextField, Typography } from "@mui/material";
 import { Formik } from 'formik'
-
+import {signupValidation} from '../utils/validation';
 export default function Signup() {
     return (
         <Box sx={{ width: '100%', display: 'flex', justifyContent: 'center', paddingTop: { sm: '20px', md: '40px' } }}>
@@ -14,7 +14,7 @@ export default function Signup() {
                         email: '',
                         password: ''
                     }}
-                    validationSchema={signinValidation}
+                    validationSchema={signupValidation}
                     onSubmit={async (values, { setSubmitting, setFieldError }) => {
                         console.log(values);
                     }}
