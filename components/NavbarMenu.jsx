@@ -5,6 +5,8 @@ import { useRouter } from 'next/router'
 
 function NavbarMenu({ handleMenu, anchorEl, open }) {
     const route = useRouter();
+    // const id = '6541536841531sads321d2asdasda';
+    const id = ''
     return (
         <Menu
             id="basic-menu"
@@ -17,54 +19,61 @@ function NavbarMenu({ handleMenu, anchorEl, open }) {
 
         >
             <Box sx={{ minWidth: { xs: '250px', sm: '250px', md: '250px' } }}>
-                <MenuHead>
-                    <Avatar sx={{ height: { xs: '40px', sm: '40px' }, width: { xs: '40px', sm: '40px' } }} />
-                    <MenuHeadText>
-                        <Typography component='div' variant='body1'>Qaiser Hussain</Typography>
-                        <Typography component='div' variant='caption'>qaiserh844@gmail.com</Typography>
-                    </MenuHeadText>
-                </MenuHead>
+                {id ?
+                    <>
+                        <MenuHead>
+                            <Avatar sx={{ height: { xs: '40px', sm: '40px' }, width: { xs: '40px', sm: '40px' } }} />
+                            <MenuHeadText>
+                                <Typography component='div' variant='body1'>Qaiser Hussain</Typography>
+                                <Typography component='div' variant='caption'>qaiserh844@gmail.com</Typography>
+                            </MenuHeadText>
+                        </MenuHead>
 
-                <Link href='/profile'>
-                    <MenuItem onClick={handleMenu}>
-                        <ListItemIcon>
-                            <MdOutlinePortrait fontSize="large" />
-                        </ListItemIcon>
-                        Profile
-                    </MenuItem>
-                </Link>
-                <Link href='/'>
-                    <MenuItem onClick={handleMenu}>
-                        <ListItemIcon>
-                            <MdFavoriteBorder fontSize="large" />
-                        </ListItemIcon>
-                        Wishlist
-                    </MenuItem>
-                </Link>
-                <Link href='/'>
-                    <MenuItem onClick={handleMenu}>
-                        <ListItemIcon>
-                            <MdLogout fontSize="large" />
-                        </ListItemIcon>
-                        Sign out
-                    </MenuItem>
-                </Link>
-                <Divider />
+                        <Link href='/profile'>
+                            <MenuItem onClick={handleMenu}>
+                                <ListItemIcon>
+                                    <MdOutlinePortrait fontSize="large" />
+                                </ListItemIcon>
+                                Profile
+                            </MenuItem>
+                        </Link>
+                        <Link href='/'>
+                            <MenuItem onClick={handleMenu}>
+                                <ListItemIcon>
+                                    <MdFavoriteBorder fontSize="large" />
+                                </ListItemIcon>
+                                Wishlist
+                            </MenuItem>
+                        </Link>
+                        <Link href='/'>
+                            <MenuItem onClick={handleMenu}>
+                                <ListItemIcon>
+                                    <MdLogout fontSize="large" />
+                                </ListItemIcon>
+                                Sign out
+                            </MenuItem>
+                        </Link>
+                    </>
+                    :
+                    <MenuFoot>
+                        <Typography component='div' variant='caption'>Already have an account ? please sign-in</Typography>
+                        <Button variant='contained' color='warning' sx={{marginBottom:'20px'}}
+                            onClick={() => {
+                                handleMenu()
+                                route.push('/signin')
+                            }}> Sign In</Button>
+                        <Typography component='div' variant='caption'>Do not have any account yet ? please sign-up</Typography>
+                        <Button variant='outlined' color='warning'
+                            onClick={() => {
+                                handleMenu()
+                                route.push('/signup')
+                            }}
+                        > Sign Up</Button>
+                    </MenuFoot>
+                }
 
-                <MenuFoot>
-                    <Button variant='contained' color='warning'
-                        onClick={() => {
-                            handleMenu()
-                            route.push('/signin')
-                        }}> SignIn</Button>
 
-                    <Button variant='outlined' color='warning'
-                        onClick={() => {
-                            handleMenu()
-                            route.push('/signup')
-                        }}
-                    > SignUp</Button>
-                </MenuFoot>
+
             </Box>
         </Menu>
     )
@@ -83,8 +92,9 @@ const MenuHeadText = styled(Box)(({ theme }) => ({
 
 const MenuFoot = styled(Box)(({ theme }) => ({
     display: 'flex',
+    flexDirection:'column',
     justifyContent: 'center',
-    gap: '20px'
+    padding:'10px 20px'
 }))
 
 export default NavbarMenu;
