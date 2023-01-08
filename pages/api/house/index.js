@@ -2,7 +2,6 @@ import {createHouse,getAllHouse} from '../../../utils/controllers/houses';
 
 const handler = async (req, res) => {
   const {method} = req;
-  const {detailId} = req.query;
   switch (method) {
     case 'GET':
         getAllHouse(req,res)

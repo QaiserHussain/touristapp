@@ -1,18 +1,26 @@
 import { Box, Button, Chip, FormControl, InputLabel, MenuItem, OutlinedInput, Select, TextField, Typography } from "@mui/material";
 import { Formik } from 'formik'
+import { useMutation, useQueryClient } from 'react-query'
+import {useSnackbar} from 'notistack';
+import {createHouse} from '../../../helper/house';
 
 export default function Add() {
+    const { mutateAsync } = useMutation(createHouse);
+    const queryClient = useQueryClient();
+    const { enqueueSnackbar } = useSnackbar();
+
     const names = [
-        'Oliver Hansen',
-        'Van Henry',
-        'April Tucker',
-        'Ralph Hubbard',
-        'Omar Alexander',
-        'Carlos Abbott',
-        'Miriam Wagner',
-        'Bradley Wilkerson',
-        'Virginia Andrews',
-        'Kelly Snyder',
+        'Wifi',
+        'Swimming pool',
+        'Tea service',
+        'Waiters',
+        'Music',
+        'LED',
+        'Shower',
+        'Kids toys',
+        'Chef',
+        'Security',
+        'Car parking'
     ];
 
     return (
@@ -22,7 +30,7 @@ export default function Add() {
                 <Typography variant='caption' component='div' sx={{ textAlign: 'center', marginBottom: '15px' }}>please fill right information</Typography>
                 <Formik
                     initialValues={{
-                        user: '',
+                        user: '63b919b55a515ce11b5d0060',
                         title: '',
                         description: '',
                         address: '',
@@ -35,29 +43,53 @@ export default function Add() {
                         imgs: [],
                     }}
                     // validationSchema={signupValidation}
-                    onSubmit={async (values, { setSubmitting, setFieldError }) => {
-                        console.log(values);
+                    onSubmit={async (values, { setSubmitting, setFieldError,resetForm }) => {
+                        setSubmitting(true)
+                        try {
+                            await mutateAsync(values ,
+                                {
+                                    onError: () => {
+                                        enqueueSnackbar('Error occured',{
+                                            autoHideDuration: 3000,
+                                            variant:'error',
+                                            vertical:'top'
+                                        });
+                                    },
+                                    onSuccess: () => {
+                                        queryClient.invalidateQueries("houses");
+                                        enqueueSnackbar('created',{
+                                            autoHideDuration: 3000,
+                                            variant:'success',
+                                            vertical:'top'
+                                        })
+                                    },
+                                    onSettled: () => {
+                                        resetForm({values:''})
+                                        setSubmitting(false);
+                                    },
+                                }
+                            );
+                        } catch (e) { }
                     }}
-
                 >
                     {({ handleSubmit, isSubmitting, values, handleChange }) => (
                         <Box component='form' onSubmit={handleSubmit}>
                             <Box sx={{ marginBottom: '15px' }}>
-                                <TextField placeholder="title" label='Title' fullWidth size="small" />
+                                <TextField name='title' placeholder="title" label='Title' fullWidth size="small" value={values.title} onChange={handleChange} />
                             </Box>
                             <Box sx={{ marginBottom: '15px' }}>
-                                <TextField placeholder="description" label='Description' fullWidth size="small" />
+                                <TextField name='description' placeholder="description" label='Description' fullWidth size="small" value={values.description} onChange={handleChange} />
                             </Box>
                             <Box sx={{ marginBottom: '15px' }}>
-                                <TextField placeholder="address" label='Address' fullWidth size="small" />
+                                <TextField name='address' placeholder="address" label='Address' fullWidth size="small" value={values.address} onChange={handleChange} />
                             </Box>
                             <Box sx={{ display: 'flex', gap: 2, marginBottom: '15px' }}>
-                                <TextField placeholder="country" label='Country' fullWidth size="small" />
-                                <TextField placeholder="city" label='City' fullWidth size="small" />
+                                <TextField name='country' placeholder="country" label='Country' fullWidth size="small" value={values.country} onChange={handleChange} />
+                                <TextField name='city' placeholder="city" label='City' fullWidth size="small" value={values.city} onChange={handleChange} />
                             </Box>
                             <Box sx={{ display: 'flex', gap: 2, marginBottom: '15px' }}>
-                                <TextField placeholder="price" label='Price' fullWidth size="small" />
-                                <TextField placeholder="capacity" label='Capacity' fullWidth size="small" />
+                                <TextField name='price' placeholder="price" label='Price' fullWidth size="small" value={values.price} onChange={handleChange} />
+                                <TextField name='capacity' placeholder="capacity" label='Capacity' fullWidth size="small" value={values.capacity} onChange={handleChange} />
                             </Box>
 
 
@@ -131,10 +163,10 @@ export default function Add() {
                             </FormControl>
 
                             <Box sx={{ marginBottom: '15px' }}>
-                                <TextField placeholder="images" label='imgs' fullWidth size="small" />
+                                <TextField name='imgs' placeholder="images" label='imgs' fullWidth size="small" value={values.imgs} onChange={handleChange} />
                             </Box>
                             <Box sx={{ padding: '0 40px' }}>
-                                <Button type='submit' variant='contained' fullWidth size="small"> Create House </Button>
+                                <Button type='submit' variant='contained' fullWidth size="small" disabled={isSubmitting}> Create House </Button>
                             </Box>
                         </Box>
                     )}
