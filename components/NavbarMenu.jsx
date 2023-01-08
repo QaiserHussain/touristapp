@@ -1,12 +1,12 @@
 import { Avatar, Button, Divider, ListItemIcon, Menu, MenuItem, Typography, Box, styled } from "@mui/material"
 import Link from "next/link"
-import { MdFavoriteBorder, MdLogout, MdOutlineManageAccounts, MdOutlinePortrait } from "react-icons/md"
+import { MdFavoriteBorder, MdLogout, MdOutlineHome, MdOutlineManageAccounts, MdOutlinePortrait } from "react-icons/md"
 import { useRouter } from 'next/router'
 
 function NavbarMenu({ handleMenu, anchorEl, open }) {
     const route = useRouter();
-    // const id = '6541536841531sads321d2asdasda';
-    const id = ''
+    const id = '6541536841531sads321d2asdasda';
+    // const id = ''
     return (
         <Menu
             id="basic-menu"
@@ -43,6 +43,14 @@ function NavbarMenu({ handleMenu, anchorEl, open }) {
                                     <MdFavoriteBorder fontSize="large" />
                                 </ListItemIcon>
                                 Wishlist
+                            </MenuItem>
+                        </Link>
+                        <Link href='/dashboard/house/add'>
+                            <MenuItem onClick={handleMenu}>
+                                <ListItemIcon>
+                                    <MdOutlineHome fontSize="large" />
+                                </ListItemIcon>
+                                Create House
                             </MenuItem>
                         </Link>
                         <Link href='/'>

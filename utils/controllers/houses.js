@@ -32,7 +32,7 @@ export async function getHouse(req, res) {
 export async function createHouse(req, res) {
   const data = req.body;
   await db.connect();
-  if (!data.user, !data.name, !data.description, !data.price, !data.capacity, !data.facilities, !data.amenities, !data.imgs, !data.country, !data.city) {
+  if (!data.user, !data.title, !data.description, !data.price, !data.capacity, !data.facilities, !data.amenities, !data.imgs, !data.country, !data.city) {
     return res.status(200).json({ success: false, message: 'please enter all fields' })
   }
   try {
@@ -40,7 +40,7 @@ export async function createHouse(req, res) {
     console.log(user);
     const created = await House.create({
       user:user,
-      name:data.name,
+      title:data.title,
       description:data.description,
       address:data.address,
       price:data.price,
