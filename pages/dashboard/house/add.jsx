@@ -1,14 +1,20 @@
 import { Box, Button, Chip, FormControl, InputLabel, MenuItem, OutlinedInput, Select, TextField, Typography } from "@mui/material";
 import { Formik } from 'formik'
+import Link from 'next/link'
 import { useMutation, useQueryClient } from 'react-query'
-import {useSnackbar} from 'notistack';
-import {createHouse} from '../../../helper/house';
+import { useSnackbar } from 'notistack';
+import { createHouse } from '../../../helper/house';
+import { useSession } from 'next-auth/react'
+
 
 export default function Add() {
     const { mutateAsync } = useMutation(createHouse);
     const queryClient = useQueryClient();
+    const { data } = useSession()
     const { enqueueSnackbar } = useSnackbar();
 
+    if(!data){return <div>no athentic user please login first <Link href='/signin'  >Login</Link></div>}
+   
     const names = [
         'Wifi',
         'Swimming pool',
@@ -24,6 +30,7 @@ export default function Add() {
     ];
 
     return (
+
         <Box sx={{ width: '100%', display: 'flex', justifyContent: 'center', paddingTop: { sm: '20px', md: '40px' } }}>
             <Box sx={{ border: '1px solid lightgrey', borderRadius: '10px', padding: '20px 20px', flex: { md: 0.6, sm: 0.8, xs: 1 } }}>
                 <Typography variant='h5' component='div' sx={{ textAlign: 'center' }}> CREAT HOUSE </Typography>
@@ -43,28 +50,26 @@ export default function Add() {
                         imgs: [],
                     }}
                     // validationSchema={signupValidation}
-                    onSubmit={async (values, { setSubmitting, setFieldError,resetForm }) => {
+                    onSubmit={async (values, { setSubmitting, setFieldError, resetForm }) => {
                         setSubmitting(true)
                         try {
-                            await mutateAsync(values ,
+                            await mutateAsync(values,
                                 {
                                     onError: () => {
-                                        enqueueSnackbar('Error occured',{
+                                        enqueueSnackbar('Error occured', {
                                             autoHideDuration: 3000,
-                                            variant:'error',
-                                            vertical:'top'
+                                            variant: 'error',
                                         });
                                     },
                                     onSuccess: () => {
                                         queryClient.invalidateQueries("houses");
-                                        enqueueSnackbar('created',{
+                                        enqueueSnackbar('created', {
                                             autoHideDuration: 3000,
-                                            variant:'success',
-                                            vertical:'top'
+                                            variant: 'success',
                                         })
                                     },
                                     onSettled: () => {
-                                        resetForm({values:''})
+                                        resetForm({ values: '' })
                                         setSubmitting(false);
                                     },
                                 }

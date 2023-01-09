@@ -1,9 +1,14 @@
 import { Box, Button, TextField, Typography } from "@mui/material";
 import { signinValidation } from '../utils/validation'
 import { Formik } from 'formik'
-import { signIn} from 'next-auth/react'
+import { signIn, useSession,} from 'next-auth/react'
+import {useSnackbar} from 'notistack'
+
+
 export default function Signin() {
-    
+    const {enqueueSnackbar} = useSnackbar()
+    const {data} = useSession()
+    console.log(data);
     return (
         <Box sx={{ width: '100%', display: 'flex', justifyContent: 'center', paddingTop: { sm: '20px', md: '40px' } }}>
             <Box sx={{ border: '1px solid lightgrey', borderRadius: '10px', padding: '20px 20px', flex: { md: 0.3, sm: 0.5, xs: 1 } }}>
@@ -15,7 +20,7 @@ export default function Signin() {
                         password: ''
                     }}
                     validationSchema={signinValidation}
-                    onSubmit={async (values, { setSubmitting, setFieldError }) => {
+                    onSubmit={async (values, { setSubmitting, setFieldError,resetForm }) => {
                         try {
                             if (!!!values.email.trim()) {
                                 setFieldError("email", "Only Spaces not allowed.");
@@ -31,6 +36,12 @@ export default function Signin() {
                                 password: values.password,
                                 callbackUrl: '/'
                             })
+                            console.log(status);
+                            if(status.ok){
+                                enqueueSnackbar('Successfully login',{variant:'success',autoHideDuration:3000})
+                                resetForm({values:''})
+                            }
+                            else{enqueueSnackbar('Login error',{variant:'error',autoHideDuration:3000})}
                         } catch (e) { }
                     }}
 
