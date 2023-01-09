@@ -1,9 +1,9 @@
 import { Box, Button, TextField, Typography } from "@mui/material";
 import { signinValidation } from '../utils/validation'
 import { Formik } from 'formik'
-import {useMutation} from 'react-query'
+import { signIn} from 'next-auth/react'
 export default function Signin() {
-    const {mutateAsync} = useMutation();
+    
     return (
         <Box sx={{ width: '100%', display: 'flex', justifyContent: 'center', paddingTop: { sm: '20px', md: '40px' } }}>
             <Box sx={{ border: '1px solid lightgrey', borderRadius: '10px', padding: '20px 20px', flex: { md: 0.3, sm: 0.5, xs: 1 } }}>
@@ -18,37 +18,20 @@ export default function Signin() {
                     onSubmit={async (values, { setSubmitting, setFieldError }) => {
                         try {
                             if (!!!values.email.trim()) {
-                              setFieldError("email", "Only Spaces not allowed.");
-                              throw Error("Form Error");
+                                setFieldError("email", "Only Spaces not allowed.");
+                                throw Error("Form Error");
                             }
                             if (!!!values.password.trim()) {
-                              setFieldError("password", "Only Spaces not allowed.");
-                              throw Error("Form Error");
+                                setFieldError("password", "Only Spaces not allowed.");
+                                throw Error("Form Error");
                             }
-                            await mutateAsync(
-                            //   { body },
-                            //   {
-                            //     onSuccess: () => {
-                            //       queryClient.invalidateQueries("Quizes");
-                            //       enqueueSnackbar(
-                            //         successMessages.actionSuccess(
-                            //           id ? "Updated" : "Created",
-                            //           "Quiz"
-                            //         )
-                            //       );
-                            //       id && queryClient.invalidateQueries(["Quiz", id]);
-                            //       navigate(redirect);
-                            //     },
-                            //     onError: () => {
-                            //       enqueueSnackbar(errorMessages.default);
-                            //     },
-                            //     onSettled: () => {
-                            //       reset();
-                            //       setSubmitting(false);
-                            //     },
-                            //   }
-                            );
-                          } catch (e) {}
+                            const status = await signIn('credentials', {
+                                redirect: false,
+                                email: values.email,
+                                password: values.password,
+                                callbackUrl: '/'
+                            })
+                        } catch (e) { }
                     }}
 
                 >

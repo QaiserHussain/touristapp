@@ -1,5 +1,4 @@
 import {createUser} from '../../utils/controllers/users';
-
 const handler = async (req, res) => {
   const {method} = req
   switch (method) {

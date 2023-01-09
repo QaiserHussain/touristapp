@@ -2,11 +2,11 @@ import { Avatar, Button, Divider, ListItemIcon, Menu, MenuItem, Typography, Box,
 import Link from "next/link"
 import { MdFavoriteBorder, MdLogout, MdOutlineHome, MdOutlineManageAccounts, MdOutlinePortrait } from "react-icons/md"
 import { useRouter } from 'next/router'
+import {signOut, useSession} from 'next-auth/react'
 
 function NavbarMenu({ handleMenu, anchorEl, open }) {
     const route = useRouter();
-    const id = '6541536841531sads321d2asdasda';
-    // const id = ''
+    const {data} = useSession();
     return (
         <Menu
             id="basic-menu"
@@ -19,7 +19,7 @@ function NavbarMenu({ handleMenu, anchorEl, open }) {
 
         >
             <Box sx={{ minWidth: { xs: '250px', sm: '250px', md: '250px' } }}>
-                {id ?
+                {data ?
                     <>
                         <MenuHead>
                             <Avatar sx={{ height: { xs: '40px', sm: '40px' }, width: { xs: '40px', sm: '40px' } }} />
@@ -54,7 +54,10 @@ function NavbarMenu({ handleMenu, anchorEl, open }) {
                             </MenuItem>
                         </Link>
                         <Link href='/'>
-                            <MenuItem onClick={handleMenu}>
+                            <MenuItem onClick={()=>{
+                                handleMenu();
+                                signOut();
+                                }}>
                                 <ListItemIcon>
                                     <MdLogout fontSize="large" />
                                 </ListItemIcon>
