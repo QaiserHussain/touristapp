@@ -8,17 +8,11 @@ const userSchema = mongoose.Schema({
     role: { type: String, default: 'user' }
 },
     {
-        // toJSON: { virtuals: true },
-        // toObject: { virtuals: true },
         timestamps: true
     }
 );
 
-// userSchema.virtual('usersDetail',{
-//     ref:'House',
-//     foreignField:'userId',
-//     localField:'_id'
-// });
+
 
 const User = mongoose.models.User || mongoose.model('User', userSchema);
 export default User;

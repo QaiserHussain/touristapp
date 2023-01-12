@@ -3,6 +3,7 @@ import NextAuth from 'next-auth';
 import CredentialsProvider from 'next-auth/providers/credentials';
 import User from '../../../utils/models/users';
 import { compare } from 'bcrypt';
+
 export default NextAuth({
     providers: [
         CredentialsProvider({
@@ -17,5 +18,20 @@ export default NextAuth({
             }
         })
     ],
+    session: {
+        jwt:true
+    },
+    jwt:{
     secret:"x5s4dd4d684d15asd1a5de"
+    },
+    callbacks:{
+        async jwt(token){
+            return token
+        },
+        async session(session){
+            return session.token.token.user
+        }
+
+    }
+    
 })

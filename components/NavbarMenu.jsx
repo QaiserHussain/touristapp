@@ -24,8 +24,8 @@ function NavbarMenu({ handleMenu, anchorEl, open }) {
                         <MenuHead>
                             <Avatar sx={{ height: { xs: '40px', sm: '40px' }, width: { xs: '40px', sm: '40px' } }} />
                             <MenuHeadText>
-                                <Typography component='div' variant='body1'>Qaiser Hussain</Typography>
-                                <Typography component='div' variant='caption'>qaiserh844@gmail.com</Typography>
+                                <Typography component='div' variant='body1'>{data.username}</Typography>
+                                <Typography component='div' variant='caption'>{data.email}</Typography>
                             </MenuHeadText>
                         </MenuHead>
 

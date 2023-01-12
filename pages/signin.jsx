@@ -1,7 +1,7 @@
 import { Box, Button, TextField, Typography } from "@mui/material";
 import { signinValidation } from '../utils/validation'
 import { Formik } from 'formik'
-import { signIn, useSession,} from 'next-auth/react'
+import { signIn, useSession} from 'next-auth/react'
 import {useSnackbar} from 'notistack'
 
 
@@ -34,7 +34,8 @@ export default function Signin() {
                                 redirect: false,
                                 email: values.email,
                                 password: values.password,
-                                callbackUrl: '/'
+                                callbackUrl: '/',
+                                
                             })
                             console.log(status);
                             if(status.ok){
