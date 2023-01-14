@@ -1,14 +1,17 @@
 import { Box, Button, TextField, Typography } from "@mui/material";
 import { signinValidation } from '../utils/validation'
 import { Formik } from 'formik'
-import { signIn, useSession} from 'next-auth/react'
-import {useSnackbar} from 'notistack'
-
-
+import { useSnackbar } from 'notistack'
+import {useMutation} from 'react-query'
+import {loginUser} from '../helper/users'
+import {userSlice,savedUser} from '../store/loginSlice'
+import {useDispatch,useSelector} from 'react-redux'
 export default function Signin() {
-    const {enqueueSnackbar} = useSnackbar()
-    const {data} = useSession()
-    console.log(data);
+    const dispatch = useDispatch();
+    const user = useSelector((state)=>state.login.value)
+    console.log(user);
+    const { enqueueSnackbar } = useSnackbar()
+    const {mutateAsync} = useMutation(loginUser);
     return (
         <Box sx={{ width: '100%', display: 'flex', justifyContent: 'center', paddingTop: { sm: '20px', md: '40px' } }}>
             <Box sx={{ border: '1px solid lightgrey', borderRadius: '10px', padding: '20px 20px', flex: { md: 0.3, sm: 0.5, xs: 1 } }}>
@@ -20,7 +23,8 @@ export default function Signin() {
                         password: ''
                     }}
                     validationSchema={signinValidation}
-                    onSubmit={async (values, { setSubmitting, setFieldError,resetForm }) => {
+                    onSubmit={async (values, { setSubmitting, setFieldError, resetForm }) => {
+                        setSubmitting(true)
                         try {
                             if (!!!values.email.trim()) {
                                 setFieldError("email", "Only Spaces not allowed.");
@@ -30,19 +34,18 @@ export default function Signin() {
                                 setFieldError("password", "Only Spaces not allowed.");
                                 throw Error("Form Error");
                             }
-                            const status = await signIn('credentials', {
-                                redirect: false,
-                                email: values.email,
-                                password: values.password,
-                                callbackUrl: '/',
-                                
-                            })
-                            console.log(status);
-                            if(status.ok){
-                                enqueueSnackbar('Successfully login',{variant:'success',autoHideDuration:3000})
+                            const result = await mutateAsync(values)
+                            if(!result.success){
+                              enqueueSnackbar(result.message,{variant:'error',autoHideDuration:3000})
+                              setSubmitting(false)
+                            }else{
+                                enqueueSnackbar(result.message,{variant:'success',autoHideDuration:3000})
+                                dispatch(savedUser(result.data))
                                 resetForm({values:''})
+                                setSubmitting(false)
                             }
-                            else{enqueueSnackbar('Login error',{variant:'error',autoHideDuration:3000})}
+                            console.log(result);
+                        
                         } catch (e) { }
                     }}
 
@@ -78,7 +81,7 @@ export default function Signin() {
                                 />
                             </Box>
                             <Box sx={{ padding: '0 40px' }}>
-                                <Button type='submit' variant='contained' fullWidth > SIGN IN </Button>
+                                <Button type='submit' variant='contained' fullWidth disabled={isSubmitting} > SIGN IN </Button>
                             </Box>
                         </Box>
                     )}

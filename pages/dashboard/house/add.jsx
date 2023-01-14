@@ -1,20 +1,21 @@
 import { Box, Button, Chip, FormControl, InputLabel, MenuItem, OutlinedInput, Select, TextField, Typography } from "@mui/material";
-import { Formik } from 'formik'
-import Link from 'next/link'
-import { useMutation, useQueryClient } from 'react-query'
+import { Formik } from 'formik';
+import Link from 'next/link';
+import { useMutation, useQueryClient } from 'react-query';
 import { useSnackbar } from 'notistack';
 import { createHouse } from '../../../helper/house';
-import { useSession } from 'next-auth/react'
+import { useSession } from 'next-auth/react';
+import { houseValidation } from '../../../utils/validation'
 
 
 export default function Add() {
     const { mutateAsync } = useMutation(createHouse);
     const queryClient = useQueryClient();
-    const { data } = useSession()
+    // const { data } = useSession()
+    const data = '545sada'
     const { enqueueSnackbar } = useSnackbar();
-
-    if(!data){return <div>no athentic user please login first <Link href='/signin'  >Login</Link></div>}
-   
+    if (!data) { return <div>no athentic user please login first <Link href='/signin'  >Login</Link></div> }
+    console.log(data);
     const names = [
         'Wifi',
         'Swimming pool',
@@ -28,6 +29,7 @@ export default function Add() {
         'Security',
         'Car parking'
     ];
+  
 
     return (
 
@@ -37,7 +39,8 @@ export default function Add() {
                 <Typography variant='caption' component='div' sx={{ textAlign: 'center', marginBottom: '15px' }}>please fill right information</Typography>
                 <Formik
                     initialValues={{
-                        user: '63b919b55a515ce11b5d0060',
+                        user:'das5d1a5sd',
+                        // user: `${data._id}`,
                         title: '',
                         description: '',
                         address: '',
@@ -47,9 +50,9 @@ export default function Add() {
                         capacity: '',
                         facilities: [],
                         amenities: [],
-                        imgs: [],
+                        files: [],
                     }}
-                    // validationSchema={signupValidation}
+                    validationSchema={houseValidation}
                     onSubmit={async (values, { setSubmitting, setFieldError, resetForm }) => {
                         setSubmitting(true)
                         try {
@@ -77,7 +80,7 @@ export default function Add() {
                         } catch (e) { }
                     }}
                 >
-                    {({ handleSubmit, isSubmitting, values, handleChange }) => (
+                    {({ handleSubmit, isSubmitting, values, handleChange, setFieldValue }) => (
                         <Box component='form' onSubmit={handleSubmit}>
                             <Box sx={{ marginBottom: '15px' }}>
                                 <TextField name='title' placeholder="title" label='Title' fullWidth size="small" value={values.title} onChange={handleChange} />
@@ -166,10 +169,13 @@ export default function Add() {
                                 </Select>
 
                             </FormControl>
-
-                            <Box sx={{ marginBottom: '15px' }}>
-                                <TextField name='imgs' placeholder="images" label='imgs' fullWidth size="small" value={values.imgs} onChange={handleChange} />
+                            <Box sx={{ marginBottom: '15px' , border:'2px dotted lightgrey', cursor:'pointer'}}>
+                                <label htmlFor='select-files' style={{width:'100%'}}>
+                                    Click here to select Images
+                                    <input type="file" multiple id="select-files" name="files" style={{ display: 'none' }} onChange={(e)=>setFieldValue('files',e.currentTarget.value)} />
+                                </label>
                             </Box>
+
                             <Box sx={{ padding: '0 40px' }}>
                                 <Button type='submit' variant='contained' fullWidth size="small" disabled={isSubmitting}> Create House </Button>
                             </Box>

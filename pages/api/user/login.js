@@ -1,12 +1,9 @@
-import {createUser} from '../../../utils/controllers/users';
+import {loginUser} from '../../../utils/controllers/users';
 const handler = async (req, res) => {
   const {method} = req
   switch (method) {
-    case 'GET':
-        getUsers(req,res)
-      break;
       case 'POST':
-        createUser(req,res)
+        loginUser(req,res)
       break;
     default:
       res.setHeader('Allow',['GET','POST','PUT','DELETE'])

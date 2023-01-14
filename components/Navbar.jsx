@@ -7,10 +7,12 @@ import 'react-date-range/dist/styles.css'
 import 'react-date-range/dist/theme/default.css'
 import format from 'date-fns/format'
 import { useRouter } from 'next/router';
+import { useSelector } from 'react-redux';
 
 
 
 function Navbar() {
+    const user = useSelector((state)=>state.login.value)
     const route = useRouter();
     const [showBar, setShowBar] = useState('-100px');
 
@@ -136,7 +138,8 @@ function Navbar() {
                                 aria-expanded={open ? 'true' : undefined}
                                 onClick={handleMenu}
                             >
-                                <Avatar />
+                                {user?<Avatar src={user.image}/>:<Avatar />}
+                                
                             </IconButton>
                         </Icons>
                     </Nav>

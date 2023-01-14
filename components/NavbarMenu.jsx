@@ -2,11 +2,15 @@ import { Avatar, Button, Divider, ListItemIcon, Menu, MenuItem, Typography, Box,
 import Link from "next/link"
 import { MdFavoriteBorder, MdLogout, MdOutlineHome, MdOutlineManageAccounts, MdOutlinePortrait } from "react-icons/md"
 import { useRouter } from 'next/router'
-import {signOut, useSession} from 'next-auth/react'
-
+import {useSelector,useDispatch} from 'react-redux'
+import { savedUser } from "../store/loginSlice"
 function NavbarMenu({ handleMenu, anchorEl, open }) {
+    const user = useSelector((state)=>state.login.value)
+    const dispatch = useDispatch();
+    const logout = ()=>{
+        dispatch(savedUser())
+    }
     const route = useRouter();
-    const {data} = useSession();
     return (
         <Menu
             id="basic-menu"
@@ -19,17 +23,17 @@ function NavbarMenu({ handleMenu, anchorEl, open }) {
 
         >
             <Box sx={{ minWidth: { xs: '250px', sm: '250px', md: '250px' } }}>
-                {data ?
+                {user ?
                     <>
                         <MenuHead>
-                            <Avatar sx={{ height: { xs: '40px', sm: '40px' }, width: { xs: '40px', sm: '40px' } }} />
+                            <Avatar src={user.image} sx={{ height: { xs: '40px', sm: '40px' }, width: { xs: '40px', sm: '40px' } }} />
                             <MenuHeadText>
-                                <Typography component='div' variant='body1'>{data.username}</Typography>
-                                <Typography component='div' variant='caption'>{data.email}</Typography>
+                                <Typography component='div' variant='body1'>{user.username}</Typography>
+                                <Typography component='div' variant='caption'>{user.email}</Typography>
                             </MenuHeadText>
                         </MenuHead>
 
-                        <Link href='/profile'>
+                        <Link href={`/profile/${user._id}`}>
                             <MenuItem onClick={handleMenu}>
                                 <ListItemIcon>
                                     <MdOutlinePortrait fontSize="large" />
@@ -56,7 +60,7 @@ function NavbarMenu({ handleMenu, anchorEl, open }) {
                         <Link href='/'>
                             <MenuItem onClick={()=>{
                                 handleMenu();
-                                signOut();
+                                logout();
                                 }}>
                                 <ListItemIcon>
                                     <MdLogout fontSize="large" />
