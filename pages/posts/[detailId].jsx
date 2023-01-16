@@ -17,20 +17,20 @@ function Detail({ post }) {
   const handleDrawer = () => {
     if (open) { setOpen(false) } else { setOpen(true) }
   }
-
+console.log(post);
   if(!post){return <div>No data found</div>}
   
 
   return (
     <Typography component='div'>
-      <ImagesDrawer handleDrawer={handleDrawer} open={open} />
+      <ImagesDrawer handleDrawer={handleDrawer} open={open} images={post.images} />
       <Head handleDrawer={handleDrawer} post={post} />
       <Box sx={{ position: 'relative' }}>
         <Box sx={{ display: { xs: 'block', sm: 'none', md: 'none' } }}>
-          <Slider />
+          <Slider images={post.images}/>
         </Box>
         <Box sx={{ display: { xs: 'none', sm: 'flex', md: 'flex' } }}>
-          <ImagesGrid />
+          <ImagesGrid images={post.images}/>
         </Box>
         <Button startIcon={<MdOutlineAutoAwesome />} variant='contained' color='warning' onClick={handleDrawer} size={'small'} sx={{ display: { xs: 'none', sm: 'flex', md: 'flex' }, position: 'absolute', bottom: '15px', right: '15px', zIndex: '111' }}> Show Photos</Button>
       </Box>
@@ -52,7 +52,7 @@ function Detail({ post }) {
           <Box sx={{ margin: '10px 0 10px 0' }}>
             <Typography component='div' variant='h5'>Owner</Typography>
             <Box sx={{ display: 'flex', alignItems: 'center', gap: 1, marginTop: '20px' }}>
-              <Avatar sx={{ height: 40, width: 40 }} />
+              <Avatar src={post.user.image} sx={{ height: 40, width: 40 }} />
               <Box>
                 <Typography component='div' variant='body2'>{post.user.username}</Typography>
                 <Typography component='div' variant='caption'>{post.user.email}</Typography>
@@ -77,7 +77,7 @@ function Detail({ post }) {
         <Typography component='div' variant='caption' sx={{ marginBottom: '20px' }}>Helpful essentials you can expect when booking this home.</Typography>
         <Grid container md={8} sm={12} sx={{ gap: 2 }}>
           {post.facilities.map(i => (
-            <Grid key={i} item md={5} sx={{ border: '1px solid lightgrey', display: 'flex', alignItems: 'center', gap: 2 }}><MdRadioButtonChecked /> {i}</Grid>
+            <Grid key={i} item md={5} sx={{ display: 'flex', alignItems: 'center', gap: 2 }}><MdRadioButtonChecked /> {i}</Grid>
           ))}
         </Grid>
       </Box>
@@ -89,7 +89,7 @@ function Detail({ post }) {
         <Typography component='div' variant='caption' sx={{ marginBottom: '20px' }} >After booking this home, a trip designer can arrange any of these add-on services.</Typography>
         <Grid container md={8} sm={12} sx={{ gap: 2 }}>
         {post.amenities.map(i => (
-          <Grid key={i} item md={5} sx={{ border: '1px solid lightgrey', display: 'flex', alignItems: 'center', gap: 2 }}><MdRadioButtonChecked /> {i}</Grid>
+          <Grid key={i} item md={5} sx={{ display: 'flex', alignItems: 'center', gap: 2 }}><MdRadioButtonChecked /> {i}</Grid>
         ))}
           
         </Grid>

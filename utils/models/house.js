@@ -11,8 +11,9 @@ const houseSchema = mongoose.Schema({
     capacity: { type: String, required: true },
     facilities: [{ type: String, required: true }],
     amenities: [{ type: String, required: true }],
-    imgs: [{ type: String, required: true }],
-    rating: { type: mongoose.Schema.Types.ObjectId, ref: 'Review'},
+    images: [{ type: String, required: true }],
+    rating: { type: String, default: '' },
+    // rating: { type: mongoose.Schema.Types.ObjectId, ref: 'Review'},
     reserved: {
         from: { type: String, default: '' },
         to: { type: String, default: '' }

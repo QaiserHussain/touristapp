@@ -3,7 +3,8 @@ import React from 'react'
 import { MdClose } from 'react-icons/md'
 import itemData from '../../utils/items'
 
-function ImagesDrawer({handleDrawer, open}) {
+function ImagesDrawer({handleDrawer, open,images}) {
+
   return (
     <Drawer
         anchor={'bottom'}
@@ -13,12 +14,12 @@ function ImagesDrawer({handleDrawer, open}) {
         <Box sx={{ padding: '20px', position: 'relative',overflowY:'auto' }}>
           <IconButton onClick={handleDrawer} color='warning' ><MdClose /> </IconButton>
           <ImageList variant="masonry" cols={3} gap={8}>
-            {itemData.map((item) => (
-              <ImageListItem key={item.img}>
+            {images.map((image) => (
+              <ImageListItem key={image}>
                 <img
-                  src={`${item.img}?w=248&fit=crop&auto=format`}
-                  srcSet={`${item.img}?w=248&fit=crop&auto=format&dpr=2 2x`}
-                  alt={item.title}
+                  src={image}
+                  srcSet={image}
+                  alt={image}
                   loading="lazy"
                 />
               </ImageListItem>

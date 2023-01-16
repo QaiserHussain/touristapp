@@ -4,18 +4,26 @@ import Link from 'next/link';
 import { useMutation, useQueryClient } from 'react-query';
 import { useSnackbar } from 'notistack';
 import { createHouse } from '../../../helper/house';
-import { useSession } from 'next-auth/react';
+// import { useSession } from 'next-auth/react';
 import { houseValidation } from '../../../utils/validation'
+import { useEffect, useState } from "react";
+import Preview from "../../../components/Preview";
+import {useSelector} from 'react-redux'
 
 
 export default function Add() {
     const { mutateAsync } = useMutation(createHouse);
+    const [image, setImage] = useState([])
+    const user = useSelector((state)=> state.login.value);
+    console.log(user);
+
     const queryClient = useQueryClient();
+    console.log(image);
     // const { data } = useSession()
     const data = '545sada'
     const { enqueueSnackbar } = useSnackbar();
     if (!data) { return <div>no athentic user please login first <Link href='/signin'  >Login</Link></div> }
-    console.log(data);
+    // console.log(data);
     const names = [
         'Wifi',
         'Swimming pool',
@@ -29,7 +37,8 @@ export default function Add() {
         'Security',
         'Car parking'
     ];
-  
+ 
+
 
     return (
 
@@ -39,8 +48,8 @@ export default function Add() {
                 <Typography variant='caption' component='div' sx={{ textAlign: 'center', marginBottom: '15px' }}>please fill right information</Typography>
                 <Formik
                     initialValues={{
-                        user:'das5d1a5sd',
-                        // user: `${data._id}`,
+                        // user: 'das5d1a5sd',
+                        user: user ? `${user._id}` : '',
                         title: '',
                         description: '',
                         address: '',
@@ -50,33 +59,19 @@ export default function Add() {
                         capacity: '',
                         facilities: [],
                         amenities: [],
-                        files: [],
+                        images: [],
                     }}
-                    validationSchema={houseValidation}
+                    // validationSchema={houseValidation}
                     onSubmit={async (values, { setSubmitting, setFieldError, resetForm }) => {
                         setSubmitting(true)
+                        console.log(values);
                         try {
-                            await mutateAsync(values,
-                                {
-                                    onError: () => {
-                                        enqueueSnackbar('Error occured', {
-                                            autoHideDuration: 3000,
-                                            variant: 'error',
-                                        });
-                                    },
-                                    onSuccess: () => {
-                                        queryClient.invalidateQueries("houses");
-                                        enqueueSnackbar('created', {
-                                            autoHideDuration: 3000,
-                                            variant: 'success',
-                                        })
-                                    },
-                                    onSettled: () => {
-                                        resetForm({ values: '' })
-                                        setSubmitting(false);
-                                    },
-                                }
-                            );
+                           const created = await mutateAsync(values);
+                           if(!created.success){
+                             enqueueSnackbar(created.message,{variant:'error',autoHideDuration:3000})
+                           }else{
+                            enqueueSnackbar(created.message,{variant:'success',autoHideDuration:3000})
+                           }
                         } catch (e) { }
                     }}
                 >
@@ -169,11 +164,42 @@ export default function Add() {
                                 </Select>
 
                             </FormControl>
-                            <Box sx={{ marginBottom: '15px' , border:'2px dotted lightgrey', cursor:'pointer'}}>
-                                <label htmlFor='select-files' style={{width:'100%'}}>
+                            <Box sx={{ marginBottom: '15px', border: '2px dotted lightgrey', cursor: 'pointer', display: 'flex', gap: 2, flexWrap: 'wrap' }}>
+                                <label htmlFor='select-files' style={{ width: '100%' }}>
                                     Click here to select Images
-                                    <input type="file" multiple id="select-files" name="files" style={{ display: 'none' }} onChange={(e)=>setFieldValue('files',e.currentTarget.value)} />
+
+                                    <input
+                                        type="file"
+                                        multiple
+                                        id="select-files"
+                                        name="images"
+                                        style={{ display: 'none' }}
+                                        onChange={async (e) => {
+                                            const files = e.target.files;
+                                            let items = [];
+                                            for (let i = 0; i < files.length; i++) {
+                                                const element = files[i];
+                                                // console.log(element);
+                                                const converted = await imageConverter(element);
+                                                items.push(converted);
+                                                                                             
+                                                function imageConverter(file) {
+                                                    return new Promise((resolve, reject) => {
+                                                        const reader = new FileReader();
+                                                        reader.readAsDataURL(file);
+                                                        reader.onload = () => { resolve(reader.result) }
+                                                        reader.onerror = (error) => { reject(error) }
+                                                    })
+                                                }
+                                            }
+                                            setImage(items)
+                                            setFieldValue('images', items)
+                                        }}
+                                    />
                                 </label>
+
+                                {image.length > 0 ? image.map(i=>(<Preview key={i} pic={i}/>)) :'no mage selected yet'}
+                                
                             </Box>
 
                             <Box sx={{ padding: '0 40px' }}>

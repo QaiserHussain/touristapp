@@ -28,5 +28,5 @@ export const houseValidation = Yup.object().shape({
     capacity: Yup.string().required('Capacity is required.'),
     facilities: Yup.string().required('Facilites is required.'),
     amenities: Yup.string().required('Amenities is required.'),
-    imgs: Yup.string().required('Images is required.'),
+    images: Yup.string().required('Images is required.'),
 });
