@@ -20,7 +20,7 @@ const handler = async (req, res) => {
 export const config = {
   api: {
       bodyParser: {
-          sizeLimit: '20mb'
+          sizeLimit: '10mb'
       }
   }
 }

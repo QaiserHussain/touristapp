@@ -6,7 +6,7 @@ function FeaturedCard({item}) {
     return (
         <Card sx={{ width:'100%', border: 'none', boxShadow: 'none' }}>
             <Typography component={'div'} sx={{ height: { xs: '200px', sm: '250px', md: '250px', lg: '250px' } }}>
-                <Image src={item.images[0]} alt={item.images[0]} style={{ width: '100%', height: '100%', borderRadius: '20px' }} />
+                <Image src={item.images[0]} width={100} height={100} alt={item.images[0]} style={{ width: '100%', height: '100%', borderRadius: '20px' }} />
             </Typography>
             <CardContent sx={{ padding: '0', paddingTop: '10px' }}>
                 <Typography component={"div"} gutterBottom variant="h5" sx={{ display: 'flex', justifyContent: 'space-between', fontSize: { xs: '16px', sm: '20px', md: '20px' } }} >

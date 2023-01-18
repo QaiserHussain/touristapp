@@ -3,7 +3,7 @@ import Slider from '../components/Slider'
 import Packages from '../components/Packages'
 import Featured from '../components/featured'
 import { Box } from '@mui/material'
-import {useSession} from 'next-auth/react'
+// import {useSession} from 'next-auth/react'
 export default function Home({data}) {
   return (
     <>
